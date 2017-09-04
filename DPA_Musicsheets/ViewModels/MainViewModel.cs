@@ -68,12 +68,12 @@ namespace DPA_Musicsheets.ViewModels
 
         public ICommand OnKeyDownCommand => new RelayCommand<KeyEventArgs>((e) =>
         {
-            Console.WriteLine($"Key down: {e.Key}");
+            //Console.WriteLine($"Key down: {e.Key}");
         });
 
         public ICommand OnKeyUpCommand => new RelayCommand(() =>
         {
-            Console.WriteLine("Key Up");
+            //Console.WriteLine("Key Up");
         });
 
         public ICommand OnWindowClosingCommand => new RelayCommand(() =>

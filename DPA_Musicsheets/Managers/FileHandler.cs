@@ -121,8 +121,8 @@ namespace DPA_Musicsheets.Managers
                                     if (previousNoteAbsoluteTicks > 0)
                                     {
                                         // Finish the last notelength.
-                                        double percentageOfBar;
-                                        lilypondContent.Append(GetNoteLength(previousNoteAbsoluteTicks, midiEvent.AbsoluteTicks, division, _beatNote, _beatsPerBar, out percentageOfBar));
+                                        //double percentageOfBar;
+                                        lilypondContent.Append(GetNoteLength(previousNoteAbsoluteTicks, midiEvent.AbsoluteTicks, division, _beatNote, _beatsPerBar, out var percentageOfBar));
                                         lilypondContent.Append(" ");
 
                                         percentageOfBarReached += percentageOfBar;
@@ -151,8 +151,8 @@ namespace DPA_Musicsheets.Managers
                                 else if (!startedNoteIsClosed)
                                 {
                                     // Finish the previous note with the length.
-                                    double percentageOfBar;
-                                    lilypondContent.Append(GetNoteLength(previousNoteAbsoluteTicks, midiEvent.AbsoluteTicks, division, _beatNote, _beatsPerBar, out percentageOfBar));
+                                    //double percentageOfBar;
+                                    lilypondContent.Append(GetNoteLength(previousNoteAbsoluteTicks, midiEvent.AbsoluteTicks, division, _beatNote, _beatsPerBar, out var percentageOfBar));
                                     previousNoteAbsoluteTicks = midiEvent.AbsoluteTicks;
                                     lilypondContent.Append(" ");
 
@@ -470,7 +470,7 @@ namespace DPA_Musicsheets.Managers
             sequence.Add(metaTrack);
 
             // Calculate tempo
-            int speed = (60000000 / _bpm);
+            int speed = 60000000 / _bpm;
             byte[] tempo = new byte[3];
             tempo[0] = (byte)((speed >> 16) & 0xff);
             tempo[1] = (byte)((speed >> 8) & 0xff);
@@ -491,7 +491,7 @@ namespace DPA_Musicsheets.Managers
                         double absoluteLength = 1.0 / (double)note.Duration;
                         absoluteLength += (absoluteLength / 2.0) * note.NumberOfDots;
 
-                        double relationToQuartNote = _beatNote / 4;
+                        double relationToQuartNote = _beatNote / 4.0;
                         double percentageOfBeatNote = (1.0 / _beatNote) / absoluteLength;
                         double deltaTicks = (sequence.Division / relationToQuartNote) / percentageOfBeatNote;
 
