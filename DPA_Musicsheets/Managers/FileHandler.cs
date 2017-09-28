@@ -1,7 +1,5 @@
-﻿
-using DPA_Musicsheets.Models;
+﻿using DPA_Musicsheets.Models;
 using PSAMControlLibrary;
-using PSAMWPFControlLibrary;
 using Sanford.Multimedia.Midi;
 using System;
 using System.Collections.Generic;
@@ -10,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Managers
 {
@@ -35,9 +32,9 @@ namespace DPA_Musicsheets.Managers
         public event EventHandler<WPFStaffsEventArgs> WPFStaffsChanged;
         public event EventHandler<MidiSequenceEventArgs> MidiSequenceChanged;
 
-        private int _beatNote;        // De waarde van een beatnote.
-        private int _bpm;             // Aantal beatnotes per minute.
-        private int _beatsPerBar;     // Aantal beatnotes per maat.
+        private int _beatNote = 4;  // De waarde van een beatnote.
+        private int _bpm = 120;     // Aantal beatnotes per minute.
+        private int _beatsPerBar;   // Aantal beatnotes per maat.
 
         public void OpenFile(string fileName)
         {
@@ -72,8 +69,8 @@ namespace DPA_Musicsheets.Managers
             content = content.Trim().ToLower().Replace("\r\n", " ").Replace("\n", " ").Replace("  ", " ");
             LinkedList<LilypondToken> tokens = GetTokensFromLilypond(content);
             WPFStaffs.Clear();
-            string message;
-            WPFStaffs.AddRange(GetStaffsFromTokens(tokens, out message));
+
+            WPFStaffs.AddRange(GetStaffsFromTokens(tokens, out var message));
             WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs, Message = message });
 
             MidiSequence = GetSequenceFromWPFStaffs();
@@ -82,7 +79,7 @@ namespace DPA_Musicsheets.Managers
 
         public void LoadMidi(Sequence sequence)
         {
-            StringBuilder lilypondContent = new StringBuilder();
+            var lilypondContent = new StringBuilder();
             lilypondContent.AppendLine("\\relative c' {");
             lilypondContent.AppendLine("\\clef treble");
 
@@ -482,10 +479,9 @@ namespace DPA_Musicsheets.Managers
 
             foreach (MusicalSymbol musicalSymbol in WPFStaffs)
             {
-                switch (musicalSymbol.Type)
+                switch (musicalSymbol)
                 {
-                    case MusicalSymbolType.Note:
-                        Note note = musicalSymbol as Note;
+                    case Note note when musicalSymbol.Type == MusicalSymbolType.Note && note.Duration > 0:
 
                         // Calculate duration
                         double absoluteLength = 1.0 / (double)note.Duration;
@@ -497,6 +493,7 @@ namespace DPA_Musicsheets.Managers
 
                         // Calculate height
                         int noteHeight = notesOrderWithCrosses.IndexOf(note.Step.ToLower()) + ((note.Octave + 1) * 12);
+
                         noteHeight += note.Alter;
                         notesTrack.Insert(absoluteTicks, new ChannelMessage(ChannelCommand.NoteOn, 1, noteHeight, 90)); // Data2 = volume
 
@@ -504,7 +501,7 @@ namespace DPA_Musicsheets.Managers
                         notesTrack.Insert(absoluteTicks, new ChannelMessage(ChannelCommand.NoteOn, 1, noteHeight, 0)); // Data2 = volume
 
                         break;
-                    case MusicalSymbolType.TimeSignature:
+                    case Object h when musicalSymbol.Type == MusicalSymbolType.TimeSignature:
                         byte[] timeSignature = new byte[4];
                         timeSignature[0] = (byte)_beatsPerBar;
                         timeSignature[1] = (byte)(Math.Log(_beatNote) / Math.Log(2));
@@ -522,34 +519,41 @@ namespace DPA_Musicsheets.Managers
 
         internal void SaveToPDF(string fileName)
         {
-            string withoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            string tmpFileName = $"{fileName}-tmp.ly";
-            SaveToLilypond(tmpFileName);
-
             string lilypondLocation = @"C:\Program Files (x86)\LilyPond\usr\bin\lilypond.exe";
-            string sourceFolder = Path.GetDirectoryName(tmpFileName);
-            string sourceFileName = Path.GetFileNameWithoutExtension(tmpFileName);
-            string targetFolder = Path.GetDirectoryName(fileName);
-            string targetFileName = Path.GetFileNameWithoutExtension(fileName);
-
-            var process = new Process
+            
+            if (File.Exists(lilypondLocation))
             {
-                StartInfo =
+                string withoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                string tmpFileName = $"{fileName}-tmp.ly";
+                SaveToLilypond(tmpFileName);
+
+                string sourceFolder = Path.GetDirectoryName(tmpFileName);
+                string sourceFileName = Path.GetFileNameWithoutExtension(tmpFileName);
+                string targetFolder = Path.GetDirectoryName(fileName);
+                string targetFileName = Path.GetFileNameWithoutExtension(fileName);
+
+                var process = new Process
+                {
+                    StartInfo =
                 {
                     WorkingDirectory = sourceFolder,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     Arguments = String.Format("--pdf \"{0}\\{1}.ly\"", sourceFolder, sourceFileName),
                     FileName = lilypondLocation
                 }
-            };
+                };
 
-            process.Start();
-            while (!process.HasExited) { /* Wait for exit */
+                process.Start();
+                while (!process.HasExited) { /* Wait for exit */
                 }
                 if (sourceFolder != targetFolder || sourceFileName != targetFileName)
+                {
+                    File.Move(sourceFolder + "\\" + sourceFileName + ".pdf", targetFolder + "\\" + targetFileName + ".pdf");
+                    File.Delete(tmpFileName);
+                }
+            } else
             {
-                File.Move(sourceFolder + "\\" + sourceFileName + ".pdf", targetFolder + "\\" + targetFileName + ".pdf");
-                File.Delete(tmpFileName);
+                Console.WriteLine("That doesn't work");
             }
         }
 
