@@ -5,7 +5,7 @@
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:PSAMWPFControl="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
-        Title="DPA Musicsheets" Height="700" Width="1200"
+        Title="Team Biem Musicsheets" Height="700" Width="1200"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
