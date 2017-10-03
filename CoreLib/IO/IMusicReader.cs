@@ -11,9 +11,9 @@ namespace Core.IO
         /// <summary>
         /// Reads a Sheet from a file asynchronously.
         /// </summary>
-        /// <param name="filePath">The file to read</param>
-        /// <param name="name">The name to give the music sheet, leave null to use the file name.</param>
         /// <returns></returns>
-        Task<Sheet> ReadFromFileAsync(string filePath, string name = null);
+        Task<Sheet> ReadFromFileAsync();
+
+        void SetFilePath(string path);
     }
 }

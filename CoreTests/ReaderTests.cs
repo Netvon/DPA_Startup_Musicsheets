@@ -9,7 +9,12 @@ namespace CoreTests
     [MusicReader(".mid", "fake")]
     public class MockReader : IMusicReader
     {
-        public Task<Sheet> ReadFromFileAsync(string filePath, string name = null)
+        public Task<Sheet> ReadFromFileAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetFilePath(string path)
         {
             throw new NotImplementedException();
         }
@@ -36,6 +41,17 @@ namespace CoreTests
             var reader = f.GetReader("hallo.mid");
 
             Assert.IsTrue(reader is MockReader);
+        }
+
+        [TestMethod]
+        public async Task TestFile()
+        {
+            var f = new MusicReaderFactory();
+            var reader = f.GetReader("../../../DPA_Musicsheets/Files/Twee-emmertjes-water-halen.mid");
+            await reader.ReadFromFileAsync();
+
+
+            Assert.IsTrue(true);
         }
     }
 }

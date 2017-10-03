@@ -9,7 +9,12 @@ namespace Core.IO.Internal
     [MusicReader(".ly", nameof(LilipondMusicReader))]
     class LilipondMusicReader : IMusicReader
     {
-        public Task<Sheet> ReadFromFileAsync(string filePath, string name = null)
+        public Task<Sheet> ReadFromFileAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetFilePath(string path)
         {
             throw new NotImplementedException();
         }

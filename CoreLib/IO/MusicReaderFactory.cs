@@ -38,7 +38,12 @@ namespace Core.IO
                 var attr = reader.GetCustomAttribute<MusicReaderAttribute>();
 
                 if (attr?.MatchesExtension(ext) == true)
-                    return Activator.CreateInstance(reader.AsType()) as IMusicReader;
+                {
+                    var instance = Activator.CreateInstance(reader.AsType()) as IMusicReader;
+                    instance.SetFilePath(filePath);
+
+                    return instance;
+                }
 
             }
 
