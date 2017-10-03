@@ -56,8 +56,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{9ad0eb57-c6b1-4679-bd78-0cc4f921747d}</Project>
+    <ProjectReference Include="..\CoreLib\Core.csproj">
+      <Project>{c1580a7b-971d-4eb0-a5a4-57b09b247f48}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
