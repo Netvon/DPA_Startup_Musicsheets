@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPA_Musicsheets.Models
+namespace Core.Models
 {
-    class Sheet
+    public class Sheet
     {
         public string Name { get; set; }
         public SheetKey Key { get; set; }
 
-        public List<Staff> Staffs { get; set; }
+        public IEnumerable<Staff> Staffs { get; set; } = new List<Staff>();
     }
 }

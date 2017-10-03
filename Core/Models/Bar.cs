@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace DPA_Musicsheets.Models
+namespace Core.Models
 {
     public class Bar
     {
         public uint UpperSignature { get; set; }
         public uint LowerSignature { get; set; }
 
-        public List<MSNote> Notes { get; set; }
+        public IEnumerable<MSNote> Notes { get; set; } = new List<MSNote>();
 
     }
 }

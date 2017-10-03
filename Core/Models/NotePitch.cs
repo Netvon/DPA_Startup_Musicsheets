@@ -1,4 +1,4 @@
-﻿namespace DPA_Musicsheets.Models
+﻿namespace Core.Models
 {
     public enum NotePitch
     {

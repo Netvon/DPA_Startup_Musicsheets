@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPA_Musicsheets.Models
+namespace Core.Models
 {
-    class RestNote : MSNote
+    public class RestNote : MSNote
     {
     }
 }
