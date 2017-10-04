@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 namespace Core.IO
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class MusicReaderAttribute : Attribute
+    public sealed class SheetReaderAttribute : Attribute
     {
         // This is a positional argument
-        public MusicReaderAttribute(string handleExtension, string name)
+        public SheetReaderAttribute(string handleExtension, string name)
         {
             HandleExtension = handleExtension;
             Name = name;

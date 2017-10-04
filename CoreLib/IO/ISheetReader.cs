@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.IO
 {
-    public interface IMusicReader
+    public interface ISheetReader
     {
         /// <summary>
         /// Reads a Sheet from a file asynchronously.

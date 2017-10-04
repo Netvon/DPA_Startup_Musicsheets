@@ -10,6 +10,7 @@ namespace Core.Models
     {
         public string Name { get; set; }
         public SheetKey Key { get; set; }
+        public uint Tempo { get; set; }
 
         public IEnumerable<Staff> Staffs { get; set; } = new List<Staff>();
     }

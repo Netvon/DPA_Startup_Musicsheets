@@ -25,6 +25,9 @@ namespace Core.Builder
 
         public virtual void AddTimeSignature(uint upper, uint lower)
         {
+            if (barBuilder != null)
+                return;
+
             barBuilder = () =>
             {
                 return new Bar()
@@ -33,6 +36,11 @@ namespace Core.Builder
                     UpperSignature = upper
                 };
             };
+        }
+
+        internal void AddTempto(uint bpm)
+        {
+            sheet.Tempo = bpm;
         }
     }
 }

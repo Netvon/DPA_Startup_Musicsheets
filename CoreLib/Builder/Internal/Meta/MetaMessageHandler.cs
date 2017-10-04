@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Core.Models;
 using Sanford.Multimedia.Midi;
 
-namespace Core.Builder.Internal
+namespace Core.Builder.Internal.Meta
 {
     class MetaMessageHandler : IMessageHandler
     {

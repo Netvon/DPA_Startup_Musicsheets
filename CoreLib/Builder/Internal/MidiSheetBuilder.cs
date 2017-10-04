@@ -8,18 +8,13 @@ using Sanford.Multimedia.Midi;
 
 namespace Core.Builder.Internal
 {
-    class MidiSheetBuidler : SheetBuilder
+    class MidiSheetBuilder : SheetBuilder
     {
         readonly IEnumerable<IMessageHandler> messageHandlers;
 
-        public MidiSheetBuidler()
+        public MidiSheetBuilder()
         {
             messageHandlers = Util.Reflection.GetInstancesOf<IMessageHandler>();
-        }
-
-        override public void AddKey(SheetKey key)
-        {
-            throw new NotImplementedException();
         }
 
         public void AddMidiMessage(IMidiMessage message)

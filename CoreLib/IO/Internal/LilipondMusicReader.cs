@@ -6,8 +6,8 @@ using Core.Models;
 
 namespace Core.IO.Internal
 {
-    [MusicReader(".ly", nameof(LilipondMusicReader))]
-    class LilipondMusicReader : IMusicReader
+    [SheetReader(".ly", nameof(LilipondMusicReader))]
+    class LilipondMusicReader : ISheetReader
     {
         public Task<Sheet> ReadFromFileAsync()
         {

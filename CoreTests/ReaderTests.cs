@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoreTests
 {
-    [MusicReader(".mid", "fake")]
-    public class MockReader : IMusicReader
+    [SheetReader(".mid", "fake")]
+    public class MockReader : ISheetReader
     {
         public Task<Sheet> ReadFromFileAsync()
         {
@@ -26,7 +26,7 @@ namespace CoreTests
         [TestMethod]
         public void TestMethod1()
         {
-            var f = new MusicReaderFactory();
+            var f = new SheetReaderFactory();
             var reader = f.GetReader("hallo.mid");
 
             Assert.IsNotNull(reader);
@@ -37,7 +37,7 @@ namespace CoreTests
         {
             var asm = typeof(ReaderTests).Assembly;
 
-            var f = new MusicReaderFactory(asm);
+            var f = new SheetReaderFactory(asm);
             var reader = f.GetReader("hallo.mid");
 
             Assert.IsTrue(reader is MockReader);
@@ -46,8 +46,8 @@ namespace CoreTests
         [TestMethod]
         public async Task TestFile()
         {
-            var f = new MusicReaderFactory();
-            var reader = f.GetReader("../../../DPA_Musicsheets/Files/Twee-emmertjes-water-halen.mid");
+            var f = new SheetReaderFactory();
+            var reader = f.GetReader("../../../DPA_Musicsheets/Files/Alle-eendjes-zwemmen-in-het-water.mid");
             await reader.ReadFromFileAsync();
 
 

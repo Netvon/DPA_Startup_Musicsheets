@@ -43,17 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\Internal\Channel\ChannelMessageHandler.cs" />
+    <Compile Include="Builder\Internal\Channel\IChannelCommandHandler.cs" />
+    <Compile Include="Builder\Internal\Channel\NoteOnHandler.cs" />
     <Compile Include="Builder\Internal\IMessageHandler.cs" />
-    <Compile Include="Builder\Internal\IMetaTypeHandler.cs" />
-    <Compile Include="Builder\Internal\MetaMessageHandler.cs" />
-    <Compile Include="Builder\Internal\MidiSheetBuidler.cs" />
-    <Compile Include="Builder\Internal\TimeSignatureHandler.cs" />
+    <Compile Include="Builder\Internal\Meta\IMetaTypeHandler.cs" />
+    <Compile Include="Builder\Internal\Meta\MetaMessageHandler.cs" />
+    <Compile Include="Builder\Internal\MidiSheetBuilder.cs" />
+    <Compile Include="Builder\Internal\Meta\TempoHandler.cs" />
+    <Compile Include="Builder\Internal\Meta\TimeSignatureHandler.cs" />
+    <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
-    <Compile Include="IO\IMusicReader.cs" />
+    <Compile Include="IO\ISheetReader.cs" />
     <Compile Include="IO\Internal\LilipondMusicReader.cs" />
     <Compile Include="IO\Internal\MidiMusicReader.cs" />
-    <Compile Include="IO\MusicReaderAttribute.cs" />
-    <Compile Include="IO\MusicReaderFactory.cs" />
+    <Compile Include="IO\SheetReaderAttribute.cs" />
+    <Compile Include="IO\SheetReaderFactory.cs" />
     <Compile Include="Models\Bar.cs" />
     <Compile Include="Models\MSNote.cs" />
     <Compile Include="Models\NoteModifier.cs" />

@@ -11,15 +11,18 @@ using System.Linq;
 
 namespace Core.IO.Internal
 {
-    [MusicReader("(.mid|.midi)", nameof(MidiMusicReader))]
-    class MidiMusicReader : IMusicReader
+    [SheetReader("(.mid|.midi)", nameof(MidiMusicReader))]
+    class MidiMusicReader : ISheetReader
     {
+        /// <summary>Path to the MIDI File</summary>
         private string filePath;
+
+        /// <summary>Used to correctly load the MIDI file Async</summary>
         private SemaphoreSlim mse = new SemaphoreSlim(0, 1);
 
         public async Task<Sheet> ReadFromFileAsync()
         {
-            var builder = new MidiSheetBuidler();
+            var builder = new MidiSheetBuilder();
 
             var sequence = await LoadMidiAsync(filePath);
 
@@ -37,7 +40,7 @@ namespace Core.IO.Internal
         public void SetFilePath(string path)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentException("message", nameof(path));
+                throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new ArgumentException("The given path does not exist", nameof(path));
 
