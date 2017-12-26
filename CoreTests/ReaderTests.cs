@@ -3,6 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Core.IO;
 using Core.Models;
 using System.Threading.Tasks;
+using System.IO.Compression;
+using System.IO;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace CoreTests
 {
@@ -52,6 +57,50 @@ namespace CoreTests
 
 
             Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TestZip()
+        {
+            
+
+            // https://docs.microsoft.com/en-us/dotnet/api/system.io.compression.ziparchive?view=netframework-4.7.1
+            using (var zipToOpen = new FileStream("../../../DPA_Musicsheets/Files/Tant_qu_il_y_aura_des_toiles.mxl", FileMode.Open))
+            {
+                using (var archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read))
+                {
+                    var entry = archive.Entries.First(e => {
+                        return e.FullName.EndsWith(".xml", StringComparison.InvariantCultureIgnoreCase)
+                            && !e.FullName.StartsWith("META-INF", StringComparison.InvariantCultureIgnoreCase);
+                    });
+
+                    using(var reader = XmlReader.Create(entry.Open(), new XmlReaderSettings() { Async = true, DtdProcessing = DtdProcessing.Parse }))
+                    {
+                        var doc = XDocument.Load(reader);
+                        var index = doc.DocumentType.PublicId.IndexOf("MusicXML 3.0", StringComparison.InvariantCultureIgnoreCase);
+                        if (index == -1)
+                            return;
+
+                        var parts = doc.Root.Descendants("part");
+
+                        foreach (var part in parts)
+                        {
+                            var meassures = part.Descendants("measure");
+
+                            foreach (var meassure in meassures)
+                            {
+                                var attributes = part.Descendants("attributes").SelectMany(x => x.Elements());
+                                var notes = part.Descendants("note");
+                                var n = 'n';
+                            }
+
+                            var h2 = 'h';
+                        }
+
+                        var h = 'g';
+                    }
+                }
+            }
         }
     }
 }
