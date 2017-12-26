@@ -9,7 +9,7 @@ namespace Core.Builder
     {
         readonly Sheet sheet;
 
-        Func<Bar> barBuilder;
+        BarFactory barFactory;
 
         public SheetBuilder()
         {
@@ -25,17 +25,10 @@ namespace Core.Builder
 
         public virtual void AddTimeSignature(uint upper, uint lower)
         {
-            if (barBuilder != null)
+            if (barFactory != null)
                 return;
 
-            barBuilder = () =>
-            {
-                return new Bar()
-                {
-                    LowerSignature = lower,
-                    UpperSignature = upper
-                };
-            };
+            barFactory = new BarFactory(lower, upper);
         }
 
         internal void AddTempto(uint bpm)

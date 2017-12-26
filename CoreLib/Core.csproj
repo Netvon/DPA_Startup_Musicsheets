@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\BarFactory.cs" />
     <Compile Include="Builder\Internal\Channel\ChannelMessageHandler.cs" />
     <Compile Include="Builder\Internal\Channel\IChannelCommandHandler.cs" />
     <Compile Include="Builder\Internal\Channel\NoteOnHandler.cs" />
