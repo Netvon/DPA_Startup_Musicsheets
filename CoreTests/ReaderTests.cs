@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace CoreTests
 {
@@ -76,12 +77,23 @@ namespace CoreTests
 
                     using(var reader = XmlReader.Create(entry.Open(), new XmlReaderSettings() { Async = true, DtdProcessing = DtdProcessing.Parse }))
                     {
+                        var xpath = new XPathDocument(reader);
+                        var nav = xpath.CreateNavigator();
+
+                        var select = nav.Select("/score-partwise/part[1]/measure/attributes");
+                        select.MoveNext();
+
+                        var beats = select.Current.SelectSingleNode("time/beats");
+                        var beat_type = select.Current.SelectSingleNode("time/beat-type");
+
                         var doc = XDocument.Load(reader);
                         var index = doc.DocumentType.PublicId.IndexOf("MusicXML 3.0", StringComparison.InvariantCultureIgnoreCase);
                         if (index == -1)
                             return;
 
                         var parts = doc.Root.Descendants("part");
+
+                        
 
                         foreach (var part in parts)
                         {

@@ -12,7 +12,6 @@ using Core.Util;
 
 namespace Core.IO.Internal
 {
-
     [Serializable]
     public class XmlValidationException : Exception
     {

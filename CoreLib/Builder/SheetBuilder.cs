@@ -7,7 +7,7 @@ namespace Core.Builder
 {
     public abstract class SheetBuilder
     {
-        readonly Sheet sheet;
+        readonly protected Sheet sheet;
 
         BarFactory barFactory;
 
@@ -29,6 +29,11 @@ namespace Core.Builder
                 return;
 
             barFactory = new BarFactory(lower, upper);
+        }
+
+        internal void AddName(string value)
+        {
+            sheet.Name = value;
         }
 
         internal void AddTempto(uint bpm)

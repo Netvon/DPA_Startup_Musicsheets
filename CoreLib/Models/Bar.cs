@@ -8,6 +8,5 @@ namespace Core.Models
         public uint LowerSignature { get; set; }
 
         public IEnumerable<MSNote> Notes { get; set; } = new List<MSNote>();
-
     }
 }
