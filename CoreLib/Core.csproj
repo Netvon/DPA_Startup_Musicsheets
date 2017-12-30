@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Core</RootNamespace>
     <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,8 +63,10 @@
     <Compile Include="Builder\Internal\MidiSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Meta\TempoHandler.cs" />
     <Compile Include="Builder\Internal\Meta\TimeSignatureHandler.cs" />
+    <Compile Include="Builder\Internal\XMLSheetBuilder.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
+    <Compile Include="IO\Internal\XMLSheetReader.cs" />
     <Compile Include="IO\ISheetReader.cs" />
     <Compile Include="IO\Internal\LilipondMusicReader.cs" />
     <Compile Include="IO\Internal\MidiMusicReader.cs" />
@@ -71,6 +83,7 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Reflection.cs" />
+    <Compile Include="Util\Zip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
