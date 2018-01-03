@@ -61,7 +61,7 @@ namespace Core.IO.Internal
 
         XDocument Open()
         {
-            bool isZipped = filePath.EndsWith("mxl", StringComparison.InvariantCultureIgnoreCase);
+            bool isZipped = filePath.EndsWith(".mxl", StringComparison.InvariantCultureIgnoreCase);
             Stream file = null;
             XmlReader reader = null;
             XDocument doc = null;
