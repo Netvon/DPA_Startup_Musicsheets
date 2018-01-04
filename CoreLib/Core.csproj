@@ -54,15 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\BarFactory.cs" />
-    <Compile Include="Builder\Internal\Channel\ChannelMessageHandler.cs" />
-    <Compile Include="Builder\Internal\Channel\IChannelCommandHandler.cs" />
-    <Compile Include="Builder\Internal\Channel\NoteOnHandler.cs" />
-    <Compile Include="Builder\Internal\IMessageHandler.cs" />
-    <Compile Include="Builder\Internal\Meta\IMetaTypeHandler.cs" />
-    <Compile Include="Builder\Internal\Meta\MetaMessageHandler.cs" />
-    <Compile Include="Builder\Internal\MidiSheetBuilder.cs" />
-    <Compile Include="Builder\Internal\Meta\TempoHandler.cs" />
-    <Compile Include="Builder\Internal\Meta\TimeSignatureHandler.cs" />
     <Compile Include="Builder\Internal\XMLSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Xml\IXmlElementHandler.cs" />
     <Compile Include="Builder\Internal\Xml\MeasureHandler.cs" />
@@ -74,7 +65,6 @@
     <Compile Include="IO\Internal\XMLSheetReader.cs" />
     <Compile Include="IO\ISheetReader.cs" />
     <Compile Include="IO\Internal\LilipondMusicReader.cs" />
-    <Compile Include="IO\Internal\MidiMusicReader.cs" />
     <Compile Include="IO\SheetReaderAttribute.cs" />
     <Compile Include="IO\SheetReaderFactory.cs" />
     <Compile Include="Models\Bar.cs" />
