@@ -124,7 +124,7 @@ namespace CoreTests
         {
             var sheetReader = new XMLSheetReader();
 
-            sheetReader.SetFilePath("../../../DPA_Musicsheets/Files/Tant_qu_il_y_aura_des_toiles.mxl");
+            sheetReader.SetFilePath("../../../DPA_Musicsheets/Files/2609641-Five_little_ducks.mxl");
 
             var sheet = await sheetReader.ReadFromFileAsync();
 

@@ -2,7 +2,7 @@
   \clef treble
   \time 6/8
   \tempo 4=120
-  
+
   g''4. a8 a8 a8 |
   g4 g8 e4 c8 |
   f4 g8 a4 b8 |
@@ -21,7 +21,7 @@
     \time 2/4
     c8 r8 c8 e8
     \repeat volta 2 {
-      g4 g4 | 
+      g4 g4 |
       g4 a8. g16 |
       g8 f8 f8 e8 |
       f4 d8 e8 |
@@ -41,5 +41,5 @@
       { c'2~ | c4 r4 }
     }
   }
-  
+
 }
