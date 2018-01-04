@@ -24,6 +24,13 @@ namespace Core.Builder
             sheet.Key = key;
         }
 
+        public virtual void AddBar(List<MSNote> notes)
+        {
+            var bar = barFactory.GetBar();
+            bar.Notes = notes;
+            sheet.Bars.Add(bar);
+        }
+
         public virtual void AddTimeSignature(uint upper, uint lower)
         {
             if (barFactory != null)

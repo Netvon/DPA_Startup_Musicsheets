@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,21 @@ namespace Core.Builder.Internal.Xml
 {
     class MeasureHandler : IXmlElementHandler
     {
-        public string XPathSelector => throw new NotImplementedException();
+        public string XPathSelector => "/score-partwise/part[1]/measure";
 
         public void Handle(XPathNodeIterator it, SheetBuilder builder)
-        {
-            throw new NotImplementedException();
+        { 
+            var xmlNotes = it.Current.Select("note");
+            List<MSNote> notes = new List<MSNote>();
+
+            foreach (var note in notes)
+            {
+                
+
+
+            }
+
+            builder.AddBar(notes);
         }
     }
 }

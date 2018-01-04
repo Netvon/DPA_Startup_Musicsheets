@@ -59,9 +59,9 @@
     <Compile Include="Builder\Internal\Lilypond\ILilypondTokenHandler.cs" />
     <Compile Include="Builder\Internal\XMLSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Xml\IXmlElementHandler.cs" />
+    <Compile Include="Builder\Internal\Xml\MeasureHandler.cs" />
     <Compile Include="Builder\Internal\Xml\NameHandler.cs" />
     <Compile Include="Builder\Internal\Xml\AttributesHandler.cs" />
-    <Compile Include="Builder\Internal\Xml\MeasureHandler.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
     <Compile Include="IO\Internal\XMLSheetReader.cs" />
@@ -77,7 +77,6 @@
     <Compile Include="Models\RestNote.cs" />
     <Compile Include="Models\Sheet.cs" />
     <Compile Include="Models\SheetKey.cs" />
-    <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PriorityAttribute.cs" />
     <Compile Include="Util\Reflection.cs" />

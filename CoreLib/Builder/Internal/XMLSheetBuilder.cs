@@ -26,16 +26,28 @@ namespace Core.Builder.Internal
 
         public override Sheet Build()
         {
-            foreach (var handler in handlers)
+
+            var reversedHandlers = handlers.Reverse();
+
+            foreach (var handler in reversedHandlers)
             {
                 if (string.IsNullOrWhiteSpace(handler.XPathSelector))
                     continue;
 
                 var nav = navigator.Select(handler.XPathSelector);
-
-                if (nav.Count >= 1) {
+                
+                if (nav.Count == 1) {
                     nav.MoveNext();
                     handler.Handle(nav, this);
+                } else if (nav.Count > 1)
+                {
+                    int i = 0;
+                    while (i < nav.Count)
+                    {
+                        nav.MoveNext();
+                        handler.Handle(nav, this);
+                        i++;
+                    }
                 }
             }
 
