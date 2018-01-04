@@ -57,6 +57,9 @@
     <Compile Include="Builder\Internal\LilypondSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Lilypond\KeyHandler.cs" />
     <Compile Include="Builder\Internal\Lilypond\ILilypondTokenHandler.cs" />
+    <Compile Include="Builder\Internal\Lilypond\NoteHandler.cs" />
+    <Compile Include="Builder\Internal\Lilypond\TempoHandler.cs" />
+    <Compile Include="Builder\Internal\Lilypond\TimeHandler.cs" />
     <Compile Include="Builder\Internal\XMLSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Xml\IXmlElementHandler.cs" />
     <Compile Include="Builder\Internal\Xml\MeasureHandler.cs" />

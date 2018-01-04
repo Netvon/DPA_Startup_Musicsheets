@@ -9,9 +9,11 @@ namespace Core.Builder.Internal.Lilypond
 {
     class KeyHandler : ILilypondTokenHandler
     {
-        readonly static string match_token = "\relative";
+        readonly static string match_token = "\\relative";
 
-        bool contextActive = true;
+        bool contextActive;
+        bool lookForStartBracket;
+
         public bool Accepts(string token)
         {
             if(token == match_token || contextActive)
@@ -20,12 +22,17 @@ namespace Core.Builder.Internal.Lilypond
                 return true;
             }
 
+            if(lookForStartBracket && token.Contains("{"))
+            {
+                return true;
+            }
+
             return false;
         }
 
         public void Handle(string token, SheetBuilder builder)
         {
-            if(contextActive)
+            if(contextActive && token != match_token)
             {
                 var key = token[0].ToString().ToUpper();
                 builder.AddKey((SheetKey)Enum.Parse(typeof(SheetKey), key));
@@ -33,7 +40,10 @@ namespace Core.Builder.Internal.Lilypond
                 int up = token.Count(x => x == '\'');
                 int down = token.Count(x => x == ',');
 
-                builder.AddGlobalNoteOctave(2);
+                builder.AddGlobalNoteOctave(up + down);
+
+                contextActive = false;
+                lookForStartBracket = true;
             }
         }
     }
