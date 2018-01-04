@@ -36,7 +36,7 @@ namespace Core.Builder
 
         public void AddDotts(uint amount)
         {
-            setters.Add(n => n.Dotts = amount);
+            setters.Add(n => n.Dotts += amount);
         }
 
         public void AddBaseLength(uint length)
@@ -51,7 +51,7 @@ namespace Core.Builder
             setters.Add(n =>
             {
                 if (n is PitchNote pn)
-                    pn.Octave = octave;
+                    pn.Octave += octave;
             });
         }
 

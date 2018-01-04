@@ -20,7 +20,7 @@ namespace DPA_Musicsheets.ViewModels
             set
             {
                 _fileName = value;
-                RaisePropertyChanged(() => FileName);
+                RaisePropertyChanged(nameof(FileName));
             }
         }
 
@@ -28,7 +28,11 @@ namespace DPA_Musicsheets.ViewModels
         public string CurrentState
         {
             get { return _currentState; }
-            set { _currentState = value; RaisePropertyChanged(() => CurrentState); }
+            set
+            {
+                _currentState = value;
+                RaisePropertyChanged(() => CurrentState);
+            }
         }
 
         private FileHandler _fileHandler;

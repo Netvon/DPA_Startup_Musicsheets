@@ -54,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\BarFactory.cs" />
+    <Compile Include="Builder\Internal\LilypondSheetBuilder.cs" />
+    <Compile Include="Builder\Internal\Lilypond\KeyHandler.cs" />
+    <Compile Include="Builder\Internal\Lilypond\ILilypondTokenHandler.cs" />
     <Compile Include="Builder\Internal\XMLSheetBuilder.cs" />
     <Compile Include="Builder\Internal\Xml\IXmlElementHandler.cs" />
     <Compile Include="Builder\Internal\Xml\NameHandler.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Models\SheetKey.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\PriorityAttribute.cs" />
     <Compile Include="Util\Reflection.cs" />
     <Compile Include="Util\Zip.cs" />
   </ItemGroup>

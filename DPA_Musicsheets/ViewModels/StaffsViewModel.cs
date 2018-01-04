@@ -27,7 +27,7 @@ namespace DPA_Musicsheets.ViewModels
             Staffs = new ObservableCollection<MusicalSymbol>();
 
             _fileHandler.WPFStaffsChanged += (src, args) =>
-            { 
+            {
                 Staffs.Clear();
                 foreach (var symbol in args.Symbols)
                 {

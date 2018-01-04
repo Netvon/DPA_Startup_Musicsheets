@@ -10,6 +10,7 @@ namespace Core.Builder
         readonly protected Sheet sheet;
 
         BarFactory barFactory;
+        readonly List<Action<NoteBuilder>> builderMods = new List<Action<NoteBuilder>>();
 
         public SheetBuilder()
         {
@@ -34,6 +35,22 @@ namespace Core.Builder
         internal void AddName(string value)
         {
             sheet.Name = value;
+        }
+
+        internal void AddGlobalNoteOctave(int octave)
+        {
+            builderMods.Add(nb =>
+            {
+                nb.AddOctave(octave);
+            });
+        }
+
+        internal NoteBuilder GetNoteBuilder()
+        {
+            var temp = new NoteBuilder();
+            builderMods.ForEach(x => x(temp));
+
+            return temp;
         }
 
         internal void AddTempto(uint bpm)
