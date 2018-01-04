@@ -9,6 +9,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Core.IO.Internal;
 
 namespace CoreTests
 {
@@ -113,6 +114,23 @@ namespace CoreTests
                     }
                 }
             }
+        }
+
+
+
+
+        [TestMethod]
+        async public Task XmlTest()
+        {
+            var sheetReader = new XMLSheetReader();
+
+            sheetReader.SetFilePath("../../../DPA_Musicsheets/Files/Tant_qu_il_y_aura_des_toiles.mxl");
+
+            var sheet = await sheetReader.ReadFromFileAsync();
+
+            var key = sheet.Key;
+
+            Assert.IsTrue(key.Equals(SheetKey.G));
         }
     }
 }

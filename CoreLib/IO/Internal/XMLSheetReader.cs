@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using Core.Builder.Internal;
 using Core.Models;
 using Core.Util;
@@ -36,7 +37,7 @@ namespace Core.IO.Internal
     }
 
     [SheetReader("(.mxl|.xml)", nameof(XMLSheetReader))]
-    class XMLSheetReader : ISheetReader
+    public class XMLSheetReader : ISheetReader
     {
         /// <summary>Path to the MIDI File</summary>
         string filePath;
@@ -45,7 +46,8 @@ namespace Core.IO.Internal
         {
             var builder = new XMLSheetBuilder();
             var file = Open();
-
+            
+            builder.AddXPathNavigator(file.CreateNavigator());
             return Task.FromResult(builder.Build());
         }
 
