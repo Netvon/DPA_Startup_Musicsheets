@@ -28,7 +28,7 @@ namespace Core.Builder.Internal
                     .ForEach(x => x.Handle(token, this));
             }
 
-            throw new NotImplementedException();
+            return sheet;
         }
     }
 }
