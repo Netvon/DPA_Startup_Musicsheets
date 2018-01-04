@@ -12,6 +12,6 @@ namespace Core.Models
         public SheetKey Key { get; set; }
         public uint Tempo { get; set; }
 
-        public IEnumerable<Bar> Bars { get; set; } = new List<Bar>();
+        public List<Bar> Bars { get; set; } = new List<Bar>();
     }
 }

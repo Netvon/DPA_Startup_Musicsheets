@@ -265,7 +265,6 @@ D:\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Microsoft.Practices.Service
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.pdb
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.xml
-D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\Views\StaffViewCtrl.baml
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\Views\LilypondViewerCtrl.baml
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\Views\MidiPlayerCtrl.g.cs
@@ -285,3 +284,4 @@ D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.Gene
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.CoreCompileInputs.cache
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.exe
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.pdb
+D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache

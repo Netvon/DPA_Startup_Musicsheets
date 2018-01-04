@@ -7,6 +7,6 @@ namespace Core.Models
         public uint UpperSignature { get; set; }
         public uint LowerSignature { get; set; }
 
-        public IEnumerable<MSNote> Notes { get; set; } = new List<MSNote>();
+        public List<MSNote> Notes { get; set; } = new List<MSNote>();
     }
 }

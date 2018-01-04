@@ -59,7 +59,6 @@
     <Compile Include="Builder\Internal\Xml\MeasureHandler.cs" />
     <Compile Include="Builder\Internal\Xml\NameHandler.cs" />
     <Compile Include="Builder\Internal\Xml\AttributesHandler.cs" />
-    <Compile Include="Builder\Internal\Xml\NoteHandler.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
     <Compile Include="IO\Internal\XMLSheetReader.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +13,18 @@ namespace Core.Builder.Internal.Xml
         public string XPathSelector => "/score-partwise/part[1]/measure";
 
         public void Handle(XPathNodeIterator it, SheetBuilder builder)
-        {
-
-
-            var notes = it.Current.Select("note");
+        { 
+            var xmlNotes = it.Current.Select("note");
+            List<MSNote> notes = new List<MSNote>();
 
             foreach (var note in notes)
             {
+                
 
 
             }
 
-
-
+            builder.AddBar(notes);
         }
     }
 }
