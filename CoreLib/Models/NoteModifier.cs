@@ -2,6 +2,6 @@
 {
     public enum NoteModifier
     {
-        Flat, Sharp
+        None, Flat, Sharp
     }
 }

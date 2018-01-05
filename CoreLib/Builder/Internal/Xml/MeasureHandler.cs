@@ -35,13 +35,54 @@ namespace Core.Builder.Internal.Xml
 
                     noteBuilder.AddPitch((NotePitch)Enum.Parse(typeof(NotePitch), pitch));
                     noteBuilder.AddOctave(int.Parse(octave));
+
+                    var modifier = xmlNotes.Current.SelectSingleNode("pitch/alter");
+
+                    if (modifier != null)
+                    {
+                        switch (int.Parse(modifier.Value))
+                        {
+                            case 1:
+                                noteBuilder.AddModifier(NoteModifier.Sharp);
+                                break;
+                            case -1:
+                                noteBuilder.AddModifier(NoteModifier.Flat);
+                                break;
+                            default:
+                                noteBuilder.AddModifier(NoteModifier.None);
+                                break;
+                        }
+                    } else
+                    {
+                        noteBuilder.AddModifier(NoteModifier.None);
+                    }
                 }
-                var duration = xmlNotes.Current.SelectSingleNode("duration");
-                //if (duration != null && duration.Name.Equals("duration")) { noteBuilder.AddBaseLength(); }
 
+                var type = xmlNotes.Current.SelectSingleNode("type");
+                if (type != null && type.Name.Equals("type"))
+                {
+                    // Bah switch statement 
+                    // Veranderen + even overleggen met Tom
+                    switch (type.Value.ToLower())
+                    {
+                        case "whole":
+                            noteBuilder.AddBaseLength(1);
+                            break;
+                        case "half":
+                            noteBuilder.AddBaseLength(2);
+                            break;
+                        case "quarter":
+                            noteBuilder.AddBaseLength(4);
+                            break;
+                        case "eighth":
+                            noteBuilder.AddBaseLength(8);
+                            break;
+                        default:
+                            break;
+                    }                    
+                }
 
-
-
+                notes.Add(noteBuilder.Build());
                 i++;
             }
 

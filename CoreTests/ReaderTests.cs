@@ -116,9 +116,6 @@ namespace CoreTests
             }
         }
 
-
-
-
         [TestMethod]
         async public Task XmlTest()
         {
@@ -131,6 +128,7 @@ namespace CoreTests
             var key = sheet.Key;
 
             Assert.IsTrue(key.Equals(SheetKey.G));
+            Assert.IsTrue(sheet.Bars[0].Notes[0].BaseLength == 4);
         }
     }
 }
