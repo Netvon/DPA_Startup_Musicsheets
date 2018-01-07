@@ -1,4 +1,5 @@
 ﻿
+using Core.IO.Internal;
 using DPA_Musicsheets.Models;
 using PSAMControlLibrary;
 using PSAMWPFControlLibrary;
@@ -8,9 +9,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using DPA_Musicsheets.Convertors;
 
 namespace DPA_Musicsheets.Managers
 {
@@ -39,7 +41,7 @@ namespace DPA_Musicsheets.Managers
         private int _bpm = 120;     // Aantal beatnotes per minute.
         private int _beatsPerBar;   // Aantal beatnotes per maat.
 
-        public void OpenFile(string fileName)
+        async public void OpenFile(string fileName)
         {
             if (Path.GetExtension(fileName).EndsWith(".mid"))
             {
@@ -59,6 +61,22 @@ namespace DPA_Musicsheets.Managers
                 LilypondText = sb.ToString();
 
                 LoadLilypond(sb.ToString());
+            } else if (Path.GetExtension(fileName).EndsWith(".mxl"))
+            {
+                var sheetReader = new XMLSheetReader();
+                var converter = new SheetToXMLConverter("XML");
+
+
+                sheetReader.SetFilePath(fileName);
+
+                var sheet = await sheetReader.ReadFromFileAsync();
+            
+                WPFStaffs.Clear();
+                WPFStaffs.AddRange(converter.ConvertSheet(sheet));
+                WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
+
+                MidiSequence = GetSequenceFromWPFStaffs();
+                MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
             }
             else
             {

@@ -2,6 +2,6 @@
 {
     public enum SheetKey
     {
-        G, F, C
+        G, C, F,
     }
 }

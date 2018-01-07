@@ -40,14 +40,14 @@ namespace DPA_Musicsheets.ViewModels
         public MainViewModel(FileHandler fileHandler)
         {
             _fileHandler = fileHandler;
-            FileName = @"Files/Alle-eendjes-zwemmen-in-het-water.mid";
+            FileName = @"../../Files/Five_little_ducks.mxl";
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
         }
 
         public ICommand OpenFileCommand => new RelayCommand(() =>
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Midi or LilyPond files (*.mid *.ly)|*.mid;*.ly" };
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "MusicXML or LilyPond files (*.ly *.mxl)|*.ly;*.mxl" };
             if (openFileDialog.ShowDialog() == true)
             {
                 FileName = openFileDialog.FileName;
