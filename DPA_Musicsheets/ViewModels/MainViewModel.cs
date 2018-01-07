@@ -40,7 +40,7 @@ namespace DPA_Musicsheets.ViewModels
         public MainViewModel(FileHandler fileHandler)
         {
             _fileHandler = fileHandler;
-            FileName = @"Files/Five_little_ducks.mxl";
+            FileName = @"../../Files/Five_little_ducks.mxl";
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
         }
