@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Convertors
 {
-    class SheetToXMLConverter : SheetConverter
+    class SheetToWPFConverter
     {
-        public SheetToXMLConverter(string pType) : base(pType)
-        {
-        }
-
         public IEnumerable<MusicalSymbol> ConvertSheet(Sheet sheet)
         {
             List<MusicalSymbol> symbols = new List<MusicalSymbol>();
 
-            var clef = new Clef((ClefType)sheet.Key, 2);
+            var clef = new Clef(ClefType.GClef, 2);
             symbols.Add(clef);
             var timeSignature = new TimeSignature(TimeSignatureType.Numbers, sheet.Bars[0].UpperSignature, sheet.Bars[0].LowerSignature);
             symbols.Add(timeSignature);

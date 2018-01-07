@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Text.RegularExpressions;
 using DPA_Musicsheets.Convertors;
+using Core.IO;
 
 namespace DPA_Musicsheets.Managers
 {
@@ -41,47 +42,24 @@ namespace DPA_Musicsheets.Managers
         private int _bpm = 120;     // Aantal beatnotes per minute.
         private int _beatsPerBar;   // Aantal beatnotes per maat.
 
-        async public void OpenFile(string fileName)
+        async public Task OpenFile(string fileName)
         {
-            if (Path.GetExtension(fileName).EndsWith(".mid"))
-            {
-                MidiSequence = new Sequence();
-                MidiSequence.Load(fileName);
-                MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
-                LoadMidi(MidiSequence);
-            }
-            else if (Path.GetExtension(fileName).EndsWith(".ly"))
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (var line in File.ReadAllLines(fileName))
-                {
-                    sb.AppendLine(line);
-                }
+            var sheetReaderFactory = new SheetReaderFactory();
+            var sheetWriterFactory = new SheetWriterFactory();
+            var sheetReader = sheetReaderFactory.GetReader(fileName);
+            var converter = new SheetToWPFConverter();
+            var writer = sheetWriterFactory.GetWriter(".ly");
 
-                LilypondText = sb.ToString();
-
-                LoadLilypond(sb.ToString());
-            } else if (Path.GetExtension(fileName).EndsWith(".mxl"))
-            {
-                var sheetReader = new XMLSheetReader();
-                var converter = new SheetToXMLConverter("XML");
-
-
-                sheetReader.SetFilePath(fileName);
-
-                var sheet = await sheetReader.ReadFromFileAsync();
+            var sheet = await sheetReader.ReadFromFileAsync();
             
-                WPFStaffs.Clear();
-                WPFStaffs.AddRange(converter.ConvertSheet(sheet));
-                WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
+            WPFStaffs.Clear();
+            WPFStaffs.AddRange(converter.ConvertSheet(sheet));
+            WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
 
-                MidiSequence = GetSequenceFromWPFStaffs();
-                MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
-            }
-            else
-            {
-                throw new NotSupportedException($"File extension {Path.GetExtension(fileName)} is not supported.");
-            }
+            LilypondText = await writer.WriteToString(sheet);
+
+            MidiSequence = GetSequenceFromWPFStaffs();
+            MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
         }
 
         public void LoadLilypond(string content)
