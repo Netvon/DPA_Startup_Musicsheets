@@ -40,7 +40,7 @@ namespace Core.Builder.Internal.Lilypond
                 int up = token.Count(x => x == '\'');
                 int down = token.Count(x => x == ',');
 
-                builder.AddGlobalNoteOctave(up + down);
+                //builder.AddGlobalNoteOctave(up + down);
 
                 contextActive = false;
                 lookForStartBracket = true;

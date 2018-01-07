@@ -27,10 +27,12 @@ namespace CoreTests
             reader.SetFilePath("../../../DPA_Musicsheets/Files/Twee-emmertjes-water-halen.ly");
 
 
-            var result = await reader.ReadFromFileAsync();
+            var resultA = await reader.ReadFromFileAsync();
+            var resultB = await reader.ReadFromFileAsync();
 
-            var writer = writerFactory.GetWriter("hallo.ly");
-            var strResult = await writer.WriteToString(result);
+            var writerA = writerFactory.GetWriter("hallo.ly");
+            var strResultA = await writerA.WriteToString(resultA);
+            var strResultB = await writerA.WriteToString(resultB);
 
             var nothing = string.Empty;
         }

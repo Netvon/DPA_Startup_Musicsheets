@@ -8,7 +8,7 @@ namespace Core.Builder
 {
     public abstract class SheetBuilder
     {
-        readonly protected Sheet sheet;
+        protected Sheet sheet;
 
         BarFactory barFactory;
         readonly List<Action<NoteBuilder>> builderMods = new List<Action<NoteBuilder>>();
