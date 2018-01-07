@@ -9,7 +9,6 @@ namespace Core.Commands
 {
     public interface ICommand
     {
-        void Invoke(ref State state);
-        void Undo(ref State state);
+        void Invoke();
     }
 }

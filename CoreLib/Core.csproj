@@ -68,10 +68,8 @@
     <Compile Include="Builder\Internal\Xml\AttributesHandler.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
-    <Compile Include="Editor\Internal\UndoCommand.cs" />
-    <Compile Include="Editor\State.cs" />
     <Compile Include="Editor\ICommand.cs" />
-    <Compile Include="Editor\Command.cs" />
+    <Compile Include="Editor\Commands.cs" />
     <Compile Include="IO\Internal\LilypondNoteConvertors.cs" />
     <Compile Include="IO\Internal\LilypondSheetWriter.cs" />
     <Compile Include="IO\Internal\XMLSheetReader.cs" />
@@ -97,6 +95,7 @@
     <Compile Include="Util\Zip.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
