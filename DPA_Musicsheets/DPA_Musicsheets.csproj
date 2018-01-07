@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\LilypondViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Visitor\Visitor.cs" />
     <Page Include="Views\MidiPlayerCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

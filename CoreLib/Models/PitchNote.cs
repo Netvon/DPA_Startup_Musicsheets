@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Visitor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,11 @@ namespace Core.Models
         public override string ToString()
         {
             return $"{Pitch}{Modifier} Octave: {Octave}, Dotts: {Dotts}, Length: {Length}";
+        }
+
+        public override void Visit(IVisitor visitor)
+        {
+            visitor.Accept(this);
         }
     }
 }

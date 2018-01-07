@@ -90,6 +90,7 @@
     <Compile Include="Models\RestNote.cs" />
     <Compile Include="Models\Sheet.cs" />
     <Compile Include="Models\SheetKey.cs" />
+    <Compile Include="Visitor\IVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PriorityAttribute.cs" />
     <Compile Include="Util\Reflection.cs" />
