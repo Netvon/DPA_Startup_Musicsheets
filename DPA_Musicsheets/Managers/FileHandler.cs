@@ -56,7 +56,7 @@ namespace DPA_Musicsheets.Managers
             WPFStaffs.AddRange(converter.ConvertSheet(sheet));
             WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
 
-            LilypondText = await writer.WriteToString(sheet);
+            LilypondTextChanged?.Invoke(this, new LilypondEventArgs { LilypondText = await writer.WriteToString(sheet) });
 
             MidiSequence = GetSequenceFromWPFStaffs();
             MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
