@@ -77,6 +77,7 @@ namespace Core.Builder.Internal.Lilypond
                 var length = int.Parse(numberMatches.Groups[0].Value);
 
                 noteBuidler.AddDotts((uint)dots);
+                noteBuidler.AddOctave(4);
                 noteBuidler.AddOctave(up + down);
                 noteBuidler.AddBaseLength((uint)length);
 

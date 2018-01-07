@@ -288,3 +288,6 @@ D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.Gene
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.CoreCompileInputs.cache
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.exe
 D:\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.pdb
+C:\Users\tom\source\repos\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Core.dll
+C:\Users\tom\source\repos\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\System.IO.Compression.dll
+C:\Users\tom\source\repos\DPA_Startup_Musicsheets\DPA_Musicsheets\bin\Debug\Core.pdb

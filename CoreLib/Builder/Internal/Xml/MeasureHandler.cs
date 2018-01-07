@@ -29,7 +29,7 @@ namespace Core.Builder.Internal.Xml
             };
 
 
-            var xmlNotes = it.Current.Select("note"); 
+            var xmlNotes = it.Current.Select("note");
             List<MSNote> notes = new List<MSNote>();
 
             int i = 0;
