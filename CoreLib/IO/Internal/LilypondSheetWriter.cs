@@ -67,7 +67,7 @@ namespace Core.IO.Internal
                         else if(p.Modifier == NoteModifier.Sharp)
                             notestr += "is";
 
-                        var octave = p.Octave - sheet.GlobalOctave;
+                        var octave = (p.Octave - sheet.GlobalOctave) - 4;
 
                         if (octave < 0)
                             notestr += "".PadLeft(Math.Abs(octave), ',');

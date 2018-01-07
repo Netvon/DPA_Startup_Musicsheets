@@ -11,7 +11,7 @@ namespace Core.Models
         public NotePitch Pitch { get; set; }
         public NoteModifier Modifier { get; set; }
 
-        public int Octave { get; set; }
+        public int Octave { get; set; } = 4;
 
         public override string ToString()
         {
