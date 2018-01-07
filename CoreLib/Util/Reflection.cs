@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Util
 {
-    class Reflection
+    static class Reflection
     {
         static Dictionary<string, List<object>> instances = new Dictionary<string, List<object>>();
 
