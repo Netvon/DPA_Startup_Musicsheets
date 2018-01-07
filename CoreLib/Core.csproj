@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Builder\BarFactory.cs" />
     <Compile Include="Builder\Internal\LilypondSheetBuilder.cs" />
-    <Compile Include="Builder\Internal\Lilypond\AlternativeHandler.cs" />
     <Compile Include="Builder\Internal\Lilypond\KeyHandler.cs" />
     <Compile Include="Builder\Internal\Lilypond\ILilypondTokenHandler.cs" />
     <Compile Include="Builder\Internal\Lilypond\NoteHandler.cs" />
