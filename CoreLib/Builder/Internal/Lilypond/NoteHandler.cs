@@ -30,7 +30,7 @@ namespace Core.Builder.Internal.Lilypond
 
             if (names.Any(x => x == token[0].ToString().ToUpper()) || token[0] == 'r')
             {
-                var numberMatches = Regex.Match(token, @"\d");
+                var numberMatches = Regex.Match(token, @"\d{1,2}");
 
                 return numberMatches.Length > 0 && token.Length > 0;
             }
@@ -72,7 +72,7 @@ namespace Core.Builder.Internal.Lilypond
                 int down = token.Count(x => x == ',');
                 int dots = token.Count(x => x == '.');
 
-                var numberMatches = Regex.Match(token, @"(\d)");
+                var numberMatches = Regex.Match(token, @"(\d{1,2})");
 
                 var length = int.Parse(numberMatches.Groups[0].Value);
 

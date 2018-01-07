@@ -10,17 +10,19 @@ namespace Core.Builder.Internal
 {
     public class LilypondSheetBuilder : SheetBuilder
     {
-        readonly IEnumerable<ILilypondTokenHandler> handlerInstances;
-        readonly IEnumerable<string> tokens;
+        List<ILilypondTokenHandler> handlerInstances;
+        List<string> tokens;
 
         public LilypondSheetBuilder(IEnumerable<string> tokens)
         {
-            this.tokens = tokens;
-            handlerInstances = Util.Reflection.GetInstancesOf<ILilypondTokenHandler>();
+            this.tokens = new List<string>(tokens);
         }
 
         public override Sheet Build()
         {
+            sheet = new Sheet();
+            handlerInstances = new List<ILilypondTokenHandler>(Util.Reflection.GetInstancesOf<ILilypondTokenHandler>());
+
             var allTokens = tokens.ToList();
             foreach (var token in tokens)
             {
@@ -40,6 +42,9 @@ namespace Core.Builder.Internal
                     .ToList()
                     .ForEach(x => x.Handle(token, this));
             }
+
+            tokens.Clear();
+            handlerInstances.Clear();
 
             return sheet;
         }
