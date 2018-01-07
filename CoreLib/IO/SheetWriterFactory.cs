@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.IO
 {
-    public class SheetReaderFactory
+    public class SheetWriterFactory
     {
         /// <summary>
         /// Source Assemblies. These assemblies will be used to reslove all implementations of
@@ -15,9 +16,9 @@ namespace Core.IO
         /// </summary>
         readonly List<Assembly> lookupAssemblies;
 
-        public SheetReaderFactory() : this(null) { }
+        public SheetWriterFactory() : this(null) { }
 
-        public SheetReaderFactory(Assembly assembly)
+        public SheetWriterFactory(Assembly assembly)
         {
             lookupAssemblies = new List<Assembly>()
             {
@@ -41,29 +42,29 @@ namespace Core.IO
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public ISheetReader GetReader(string filePath)
+        public ISheetWriter GetWriter(string filePath)
         {
             // get the extension of the file
             var ext = Path.GetExtension(filePath).ToLowerInvariant();
 
             // get the correct reader instance
             // the different implementations for this project can be found in the "/IO/Internal" folder
-            return GetSheetReaderInstance(filePath, ext);
+            return GetSheetWriterInstance(filePath, ext);
         }
 
-        private ISheetReader GetSheetReaderInstance(string filePath, string ext)
+        private ISheetWriter GetSheetWriterInstance(string filePath, string ext)
         {
             // Take all the Assemblies that are in the lookupAssemblies list
             // for each Assembly, find all defined types within
             var types = lookupAssemblies.SelectMany(x => x.DefinedTypes);
             // of those types, select all that implement the ISheetReader interface
-            var readersTypes = types.Where(t => t.ImplementedInterfaces.Contains(typeof(ISheetReader)));
+            var readersTypes = types.Where(t => t.ImplementedInterfaces.Contains(typeof(ISheetWriter)));
 
             // loop over all the Types that we found in the previous step
             foreach (var readerType in readersTypes)
             {
                 // get the SheetReaderAttribute from this type
-                var attr = readerType.GetCustomAttribute<SheetReaderAttribute>();
+                var attr = readerType.GetCustomAttribute<SheetWriterAttribute>();
 
                 // check if this reader type could handle the file we are trying to load
                 // if the SheetReaderAttribute was not found this will also equal false
@@ -71,7 +72,7 @@ namespace Core.IO
                 {
                     // if this reader type can read the file create a new instance of it
                     // afterwards we give the reader the path to read
-                    var instance = Activator.CreateInstance(readerType.AsType()) as ISheetReader;
+                    var instance = Activator.CreateInstance(readerType.AsType()) as ISheetWriter;
                     instance.SetFilePath(filePath);
 
                     return instance;
@@ -88,13 +89,13 @@ namespace Core.IO
             // for each Assembly, find all defined types within
             var types = lookupAssemblies.SelectMany(x => x.DefinedTypes);
             // of those types, select all that implement the ISheetReader interface
-            var readersTypes = types.Where(t => t.ImplementedInterfaces.Contains(typeof(ISheetReader)));
+            var readersTypes = types.Where(t => t.ImplementedInterfaces.Contains(typeof(ISheetWriter)));
 
             // loop over all the Types that we found in the previous step
             foreach (var readerType in readersTypes)
             {
                 // get the SheetReaderAttribute from this type
-                var attr = readerType.GetCustomAttribute<SheetReaderAttribute>();
+                var attr = readerType.GetCustomAttribute<SheetWriterAttribute>();
 
                 yield return attr.HandleExtension;
             }

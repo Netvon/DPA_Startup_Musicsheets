@@ -9,8 +9,8 @@ using Core.Builder.Internal;
 
 namespace Core.IO.Internal
 {
-    [SheetReader(".ly", nameof(LilipondMusicReader))]
-    public class LilipondMusicReader : ISheetReader
+    [SheetReader(".ly", nameof(LilypondSheetReader))]
+    public class LilypondSheetReader : ISheetReader
     {
         string filePath;
         public async Task<Sheet> ReadFromFileAsync()

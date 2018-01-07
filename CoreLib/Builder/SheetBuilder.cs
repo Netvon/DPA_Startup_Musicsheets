@@ -72,6 +72,8 @@ namespace Core.Builder
             {
                 nb.AddOctave(octave);
             });
+
+            sheet.GlobalOctave = octave;
         }
 
         internal NoteBuilder GetNoteBuilder()

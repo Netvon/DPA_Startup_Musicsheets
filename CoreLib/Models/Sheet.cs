@@ -13,5 +13,9 @@ namespace Core.Models
         public uint Tempo { get; set; }
 
         public List<Bar> Bars { get; set; } = new List<Bar>();
+        public int GlobalOctave { get; set; }
+
+        public uint UpperSignature { get; set; }
+        public uint LowerSignature { get; set; }
     }
 }

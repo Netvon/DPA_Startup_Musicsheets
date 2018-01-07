@@ -68,11 +68,15 @@
     <Compile Include="Builder\Internal\Xml\AttributesHandler.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
+    <Compile Include="IO\Internal\LilypondSheetWriter.cs" />
     <Compile Include="IO\Internal\XMLSheetReader.cs" />
     <Compile Include="IO\ISheetReader.cs" />
-    <Compile Include="IO\Internal\LilipondMusicReader.cs" />
+    <Compile Include="IO\Internal\LilypondSheetReader.cs" />
+    <Compile Include="IO\ISheetWriter.cs" />
     <Compile Include="IO\SheetReaderAttribute.cs" />
     <Compile Include="IO\SheetReaderFactory.cs" />
+    <Compile Include="IO\SheetWriterAttribute.cs" />
+    <Compile Include="IO\SheetWriterFactory.cs" />
     <Compile Include="Models\Bar.cs" />
     <Compile Include="Models\MSNote.cs" />
     <Compile Include="Models\NoteModifier.cs" />
