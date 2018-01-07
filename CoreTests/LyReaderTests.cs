@@ -15,7 +15,9 @@ namespace CoreTests
         public async Task TestLy()
         {
             var reader = new LilipondMusicReader();
-            reader.SetFilePath("../../../DPA_Musicsheets/Files/Alle-eendjes-zwemmen-in-het-water.ly");
+            //reader.SetFilePath("../../../DPA_Musicsheets/Files/Alle-eendjes-zwemmen-in-het-water.ly");
+
+            reader.SetFilePath("../../../DPA_Musicsheets/Files/Twee-emmertjes-water-halen.ly");
 
 
             var result = await reader.ReadFromFileAsync();

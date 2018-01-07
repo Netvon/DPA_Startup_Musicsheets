@@ -1,6 +1,7 @@
 ﻿using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Core.Builder
@@ -11,6 +12,8 @@ namespace Core.Builder
 
         BarFactory barFactory;
         readonly List<Action<NoteBuilder>> builderMods = new List<Action<NoteBuilder>>();
+
+        public int AlternativeCount { get; set; }
 
         public SheetBuilder()
         {
@@ -24,18 +27,37 @@ namespace Core.Builder
             sheet.Key = key;
         }
 
+        public virtual void AddRepeat(uint amount)
+        {
+            barFactory.StartRepeat(amount);
+        }
+
+        public virtual void AddStopRepeat()
+        {
+            barFactory.EndRepeat();
+        }
+
         public virtual void AddBar(List<MSNote> notes)
         {
-            var bar = barFactory.GetBar();
-            bar.Notes = notes;
-            sheet.Bars.Add(bar);
+            var bar = barFactory.GetBar(notes);
+
+            if (AlternativeCount > 0)
+            {
+                var list = sheet.Bars.Last().Alternatives.ElementAtOrDefault(AlternativeCount);
+
+                if (list == null)
+                    sheet.Bars.Last().Alternatives.Add(new List<Bar> { bar });
+                else
+                    list.Add(bar);
+            }
+            else
+            {
+                sheet.Bars.Add(bar);
+            }
         }
 
         public virtual void AddTimeSignature(uint upper, uint lower)
         {
-            if (barFactory != null)
-                return;
-
             barFactory = new BarFactory(lower, upper);
         }
 

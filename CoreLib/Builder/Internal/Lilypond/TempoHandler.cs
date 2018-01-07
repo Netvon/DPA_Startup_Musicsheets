@@ -12,7 +12,7 @@ namespace Core.Builder.Internal.Lilypond
 
         bool contextActive;
 
-        public bool Accepts(string token)
+        public bool Accepts(string previous, string token, string next)
         {
             if (token == match_token || contextActive)
             {

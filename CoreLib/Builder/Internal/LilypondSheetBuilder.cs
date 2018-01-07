@@ -21,9 +21,22 @@ namespace Core.Builder.Internal
 
         public override Sheet Build()
         {
+            var allTokens = tokens.ToList();
             foreach (var token in tokens)
             {
-                handlerInstances.Where(x => x.Accepts(token))
+                var index = allTokens.IndexOf(token);
+                string previous = null;
+                string next = null;
+
+                if( index > 1 )
+                    previous = allTokens[index - 1];
+
+                if (index + 1 < allTokens.Count)
+                {
+                    next = allTokens[index + 1];
+                }
+
+                handlerInstances.Where(x => x.Accepts(previous, token, next))
                     .ToList()
                     .ForEach(x => x.Handle(token, this));
             }

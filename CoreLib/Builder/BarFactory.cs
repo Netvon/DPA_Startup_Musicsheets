@@ -10,6 +10,8 @@ namespace Core.Builder
     class BarFactory
     {
         Func<Bar> factory;
+        Repeat initialRepeat;
+        uint rAmount;
 
         public BarFactory(uint lowerSignature, uint upperSignature)
         {
@@ -18,14 +20,34 @@ namespace Core.Builder
                 return new Bar()
                 {
                     LowerSignature = lowerSignature,
-                    UpperSignature = upperSignature
+                    UpperSignature = upperSignature,
+                    Repeat = initialRepeat,
+                    RepeatAmount = rAmount
                 };
             };
         }
 
-        public Bar GetBar()
+        public Bar GetBar(IEnumerable<MSNote> withNotes)
         {
-            return factory();
+            var temp = factory();
+
+            initialRepeat = Repeat.None;
+            rAmount = 0;
+
+            temp.Notes.AddRange(withNotes);
+
+            return temp;
+        }
+
+        public void StartRepeat(uint amount)
+        {
+            initialRepeat = Repeat.Start;
+            rAmount = amount;
+        }
+
+        public void EndRepeat()
+        {
+            initialRepeat = Repeat.End;
         }
     }
 }

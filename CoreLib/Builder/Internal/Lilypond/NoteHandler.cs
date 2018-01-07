@@ -14,9 +14,28 @@ namespace Core.Builder.Internal.Lilypond
 
         List<MSNote> currentBar = new List<MSNote>();
 
-        public bool Accepts(string token)
+        string nextToken;
+
+        public bool Accepts(string previous, string token, string next)
         {
-            return token.Contains("|") || (names.Any(x => x == token[0].ToString().ToUpper()) && token.Length > 1);
+            nextToken = next;
+
+            return CanParse(token);
+        }
+
+        bool CanParse(string token)
+        {
+            if (token.Contains("|"))
+                return true;
+
+            if (names.Any(x => x == token[0].ToString().ToUpper()) || token[0] == 'r')
+            {
+                var numberMatches = Regex.Match(token, @"\d");
+
+                return numberMatches.Length > 0 && token.Length > 0;
+            }
+
+            return false;
         }
 
         public void Handle(string token, SheetBuilder builder)
@@ -38,6 +57,15 @@ namespace Core.Builder.Internal.Lilypond
                 {
                     var pitch = (NotePitch)Enum.Parse(typeof(NotePitch), token[0].ToString().ToUpper());
                     noteBuidler.AddPitch(pitch);
+
+                    if (token.Contains("is"))
+                    {
+                        noteBuidler.AddModifier(NoteModifier.Sharp);
+                    }
+                    else if (token.Contains("es") || token.Contains("as"))
+                    {
+                        noteBuidler.AddModifier(NoteModifier.Flat);
+                    }
                 }
 
                 int up = token.Count(x => x == '\'');
@@ -55,6 +83,11 @@ namespace Core.Builder.Internal.Lilypond
                 currentBar.Add(noteBuidler.Build());
             }
 
+            if(!CanParse(nextToken))
+            {
+                builder.AddBar(currentBar);
+                currentBar.Clear();
+            }
         }
     }
 }

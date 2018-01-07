@@ -79,7 +79,7 @@ namespace Core.Builder.Internal.Xml
                             break;
                         default:
                             break;
-                    }                    
+                    }
                 }
 
                 notes.Add(noteBuilder.Build());

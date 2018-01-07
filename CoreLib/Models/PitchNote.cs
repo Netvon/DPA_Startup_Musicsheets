@@ -12,5 +12,10 @@ namespace Core.Models
         public NoteModifier Modifier { get; set; }
 
         public int Octave { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Pitch}{Modifier} Octave: {Octave}, Dotts: {Dotts}, Length: {Length}";
+        }
     }
 }

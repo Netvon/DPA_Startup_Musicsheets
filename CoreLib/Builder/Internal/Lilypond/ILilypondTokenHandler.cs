@@ -8,7 +8,7 @@ namespace Core.Builder.Internal.Lilypond
 {
     interface ILilypondTokenHandler
     {
-        bool Accepts(string token);
+        bool Accepts(string previous, string token, string next);
         void Handle(string token, SheetBuilder builder);
     }
 }

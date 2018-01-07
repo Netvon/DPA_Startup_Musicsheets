@@ -8,5 +8,9 @@ namespace Core.Models
 {
     public class RestNote : MSNote
     {
+        public override string ToString()
+        {
+            return "Rest";
+        }
     }
 }
