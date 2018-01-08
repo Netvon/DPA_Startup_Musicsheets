@@ -28,6 +28,7 @@ namespace DPA_Musicsheets.ViewModels
         public static void Cleanup()
         {
             ServiceLocator.Current.GetInstance<MidiPlayerViewModel>().Cleanup();
+            ServiceLocator.Current.GetInstance<LilypondViewModel>().Cleanup();
         }
     }
 }

@@ -110,5 +110,17 @@ namespace DPA_Musicsheets.ViewModels
                 writer.WriteToFile(careTaker.Current.MusicSheet);
             }
         });
+
+        public override void Cleanup()
+        {
+            base.Cleanup();
+
+            if (MessageBox.Show("You have changes in you're lilypond, you want to save it?", "Unsaved changes!",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                SaveAsCommand.Execute(null);
+            }       
+        }
+
     }
 }
