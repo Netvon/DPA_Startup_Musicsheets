@@ -1,4 +1,5 @@
 ﻿using Core.Editor;
+using Core.Memento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Core.Commands
 {
     public interface ICommand
     {
-        void Invoke();
+        void Invoke<T>(IMemento<T> memento);
         bool CanInvoke();
     }
 }

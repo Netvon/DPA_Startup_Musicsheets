@@ -1,5 +1,7 @@
 ﻿using Core.Commands;
 using Core.Editor;
+using Core.Memento;
+using Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Reflection;
@@ -14,10 +16,15 @@ namespace CoreTests
         public const string Hallo2CommandName = "hallo2";
         public const string Hallo3CommandName = "hallo3";
 
-        public static string Value { get; set; }
+        //public static string Value { get; set; }
+
+        class Dummy
+        {
+            public string Value { get; set; }
+        }
 
         [CommandBinding(Name = TestCommandName)]
-        class TestCommand : ICommand
+        class TestCommand : ICommand<Dummy>
         {
             public bool CanInvoke() => true;
 

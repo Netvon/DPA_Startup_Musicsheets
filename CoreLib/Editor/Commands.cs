@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Util;
+using Core.Memento;
 
 namespace Core.Editor
 {
@@ -26,7 +27,7 @@ namespace Core.Editor
             keyBindings.Add(name, new KeyBind(pattern));
         }
 
-        public bool Handle(string key)
+        public bool Handle<T>(string key, IMemento<T> memento)
         {
             bool didCommand = false;
 
@@ -38,7 +39,7 @@ namespace Core.Editor
 
                     if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke() == true)
                     {
-                        last?.Invoke();
+                        last?.Invoke(memento);
                         didCommand = true;
                     }
                 }
@@ -52,11 +53,11 @@ namespace Core.Editor
 
         public bool HasLastCommand => last != null;
 
-        public void InvokeLast()
+        public void InvokeLast<T>(IMemento<T> memento)
         {
             if (last?.CanInvoke() == true)
             {
-                last.Invoke();
+                last.Invoke(memento);
                 Reset();
             }
         }
