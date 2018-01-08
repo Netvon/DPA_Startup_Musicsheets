@@ -168,7 +168,7 @@ namespace CoreTests
 
             careTaker.Undo();
 
-            Assert.IsTrue(true);
+            Assert.AreEqual(TestCommandName, careTaker.Current.Value);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Core.Memento
     public abstract class CareTaker<TMemento>
     {
         readonly LinkedList<TMemento> mementoList;
-        LinkedListNode<TMemento> currentMemento;
+        LinkedListNode<TMemento> currentSheet;
 
         public CareTaker()
         {
@@ -20,14 +20,14 @@ namespace Core.Memento
 
         public void Save(TMemento memento)
         {
-            if (currentMemento == null)
+            if (currentSheet == null)
             {
                 mementoList.AddFirst(memento);
-                currentMemento = mementoList.First;
+                currentSheet = mementoList.First;
             }
-            else if (!memento.Equals(currentMemento.Value))
+            else if (!memento.Equals(currentSheet.Value))
             {
-                currentMemento = currentMemento.ReplaceNext(memento);
+                currentSheet = currentSheet.ReplaceNext(memento);
             }
         }
 
@@ -35,29 +35,29 @@ namespace Core.Memento
         {
             if (!CanUndo)
                 throw new IndexOutOfRangeException();
-            currentMemento = currentMemento.Previous;
-            return currentMemento.Value;
+            currentSheet = currentSheet.Next;
+            return currentSheet.Value;
         }
 
         public TMemento Undo()
         {
             if (!CanRedo)
                 throw new IndexOutOfRangeException();
-            currentMemento = currentMemento.Next;
-            return currentMemento.Value;
+            currentSheet = currentSheet.Previous;
+            return currentSheet.Value;
         }
 
-        public bool CanUndo => currentMemento?.Previous != null;
+        public bool CanUndo => currentSheet?.Next != null;
 
-        public bool CanRedo => currentMemento?.Next != null;
+        public bool CanRedo => currentSheet?.Previous != null;
 
         public TMemento Current
         {
             get {
-                if (currentMemento == null)
+                if (currentSheet == null)
                     return default(TMemento);
 
-                return currentMemento.Value;
+                return currentSheet.Value;
             }
         }
     }
