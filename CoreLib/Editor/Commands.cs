@@ -1,64 +1,20 @@
 ﻿using Core.Commands;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Util;
-using System.Text.RegularExpressions;
+using Core.Memento;
 
 namespace Core.Editor
 {
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class CommandBindingAttribute : Attribute
-    {
-        public string Name { get; set; }
-    }
-
-    public class KeyBind
-    {
-        string[] keys;
-        int matches;
-        int matchesRequired;
-        string pattern;
-
-        public KeyBind(string pattern)
-        {
-            this.pattern = pattern;
-
-            keys = pattern.Split(' ');
-            matchesRequired = keys.Length;
-        }
-
-        public bool Match(string keyInput)
-        {
-            var key = keys[matches];
-
-            if(Regex.Match(keyInput, key).Success)
-            {
-                matches++;
-
-                if(matches == matchesRequired)
-                {
-                    Reset();
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public void Reset()
-        {
-            matches = 0;
-        }
-    }
-
     public class Commands
     {
         Dictionary<string, ICommand> nameBindings;
         Dictionary<string, KeyBind> keyBindings;
+
+        ICommand last;
 
         public Commands(Assembly assembly)
         {
@@ -71,7 +27,7 @@ namespace Core.Editor
             keyBindings.Add(name, new KeyBind(pattern));
         }
 
-        public bool Handle(string key)
+        public bool Handle<T>(string key, IMemento<T> memento)
         {
             bool didCommand = false;
 
@@ -79,15 +35,36 @@ namespace Core.Editor
             {
                 if(keyBinding.Value.Match(key))
                 {
-                    nameBindings[keyBinding.Key].Invoke();
-                    didCommand = true;
+                    last = nameBindings[keyBinding.Key];
+
+                    if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke() == true)
+                    {
+                        last?.Invoke(memento);
+                        didCommand = true;
+                    }
                 }
             }
 
             if (didCommand)
-                foreach (var keyBinding in keyBindings) { keyBinding.Value.Reset(); }
+                Reset();
 
             return didCommand;
+        }
+
+        public bool HasLastCommand => last != null;
+
+        public void InvokeLast<T>(IMemento<T> memento)
+        {
+            if (last?.CanInvoke() == true)
+            {
+                last.Invoke(memento);
+                Reset();
+            }
+        }
+
+        void Reset()
+        {
+            foreach (var keyBinding in keyBindings) { keyBinding.Value.Reset(); }
         }
 
         public IEnumerable<string> CommandNames => nameBindings.Keys;

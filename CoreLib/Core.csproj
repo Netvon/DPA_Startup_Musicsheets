@@ -68,9 +68,12 @@
     <Compile Include="Builder\Internal\Xml\AttributesHandler.cs" />
     <Compile Include="Builder\NoteBuilder.cs" />
     <Compile Include="Builder\SheetBuilder.cs" />
+    <Compile Include="Editor\CommandBindingAttribute.cs" />
     <Compile Include="Editor\ICommand.cs" />
     <Compile Include="Editor\Commands.cs" />
-    <Compile Include="Extensions\LinkedListExtension.cs" />
+    <Compile Include="Editor\IFileService.cs" />
+    <Compile Include="Editor\KeyBind.cs" />
+    <Compile Include="Editor\MessageService.cs" />
     <Compile Include="IO\Internal\LilypondNoteConvertors.cs" />
     <Compile Include="IO\Internal\LilypondSheetWriter.cs" />
     <Compile Include="IO\Internal\XMLSheetReader.cs" />
