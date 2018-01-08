@@ -18,96 +18,157 @@ namespace CoreTests
 
         //public static string Value { get; set; }
 
-        class Dummy
+        class Dummy : IEquatable<Dummy>
         {
             public string Value { get; set; }
+            public int Index { get; set; }
+
+            public bool Equals(Dummy other)
+            {
+                return Value == other.Value;
+            }
         }
 
-        [CommandBinding(Name = TestCommandName)]
-        class TestCommand : ICommand<Dummy>
-        {
-            public bool CanInvoke() => true;
+        class DummyCareTaker : CareTaker<Dummy> { }
 
-            public void Invoke()
+        [CommandBinding(Name = TestCommandName)]
+        class TestCommand : ICommand
+        {
+            public bool CanInvoke<T>(CareTaker<T> careTaker) => true;
+
+            public void Invoke<T>(CareTaker<T> careTaker)
             {
-                Value = TestCommandName;
+                if(careTaker is DummyCareTaker dm)
+                {
+                    dm.Save(new Dummy
+                    {
+                        Value = TestCommandName
+                    });
+                }
             }
         }
 
         [CommandBinding(Name = HalloCommandName)]
         class HalloCommand : ICommand
         {
-            public bool CanInvoke() => true;
+            public bool CanInvoke<T>(CareTaker<T> careTaker) => true;
 
-            public void Invoke()
+            public void Invoke<T>(CareTaker<T> careTaker)
             {
-                Value = HalloCommandName;
+                if (careTaker is DummyCareTaker dm)
+                {
+                    dm.Save(new Dummy
+                    {
+                        Value = HalloCommandName
+                    });
+                }
             }
         }
 
         [CommandBinding(Name = Hallo2CommandName)]
         class Hallo2Command : ICommand
         {
-            public bool CanInvoke() => true;
+            public bool CanInvoke<T>(CareTaker<T> careTaker) => true;
 
-            public void Invoke()
+            public void Invoke<T>(CareTaker<T> careTaker)
             {
-                Value = Hallo2CommandName;
+                if (careTaker is DummyCareTaker dm)
+                {
+                    dm.Save(new Dummy
+                    {
+                        Value = Hallo2CommandName
+                    });
+                }
             }
         }
 
         [CommandBinding(Name = Hallo3CommandName)]
         class Hallo3Command : ICommand
         {
-            public bool CanInvoke() => true;
+            public bool CanInvoke<T>(CareTaker<T> careTaker) => true;
 
-            public void Invoke()
+            public void Invoke<T>(CareTaker<T> careTaker)
             {
-                Value = Hallo3CommandName;
+                if (careTaker is DummyCareTaker dm)
+                {
+                    dm.Save(new Dummy
+                    {
+                        Value = Hallo3CommandName
+                    });
+                }
             }
         }
 
         [TestMethod]
         public void TestCommandInvoke()
         {
+            var memento = new DummyCareTaker();
+            memento.Save(new Dummy());
+
             var commands = new Commands(Assembly.GetAssembly(typeof(CommandTests)));
             commands.AddBinding(TestCommandName, "(AltLeft|AltRight) C");
             commands.AddBinding(HalloCommandName, "(AltLeft|AltRight) T");
 
-            commands.Handle("AltRight");
-            commands.Handle("C");
+            commands.Handle("AltRight", memento);
+            commands.Handle("C", memento);
 
             Assert.IsTrue(commands.HasLastCommand);
-            commands.InvokeLast();
-            Assert.AreEqual(TestCommandName, Value);
+            commands.InvokeLast(memento);
+            Assert.AreEqual(TestCommandName, memento.Current.Value);
 
-            Assert.IsFalse(commands.Handle("T"));
-            Assert.AreEqual(TestCommandName, Value);
+            Assert.IsFalse(commands.Handle("T", memento));
+            Assert.AreEqual(TestCommandName, memento.Current.Value);
 
-            commands.Handle("AltLeft");
-            commands.Handle("T");
+            commands.Handle("AltLeft", memento);
+            commands.Handle("T", memento);
             Assert.IsTrue(commands.HasLastCommand);
-            commands.InvokeLast();
-            Assert.AreEqual(HalloCommandName, Value);
+            commands.InvokeLast(memento);
+            Assert.AreEqual(HalloCommandName, memento.Current.Value);
         }
 
         [TestMethod]
         public void TestCommandMultipleInvoke()
         {
+            var memento = new DummyCareTaker();
+            memento.Save(new Dummy());
+
             var commands = new Commands(Assembly.GetAssembly(typeof(CommandTests)));
             commands.AddBinding(TestCommandName, "(AltLeft|AltRight) C");
             commands.AddBinding(HalloCommandName, "(AltLeft|AltRight) T");
             commands.AddBinding(Hallo2CommandName, "(AltLeft|AltRight) T 3");
             commands.AddBinding(Hallo3CommandName, "(AltLeft|AltRight) T 4");
 
-            commands.Handle("AltRight");
-            Assert.IsFalse(commands.Handle("T"));
-            commands.Handle("3");
+            commands.Handle("AltRight", memento);
+            Assert.IsFalse(commands.Handle("T", memento));
+            commands.Handle("3", memento);
 
             Assert.IsTrue(commands.HasLastCommand);
-            commands.InvokeLast();
+            commands.InvokeLast(memento);
 
-            Assert.AreEqual(Hallo2CommandName, Value);
+            Assert.AreEqual(Hallo2CommandName, memento.Current.Value);
+        }
+
+        [TestMethod]
+        public void TestCommandUndoInvoke()
+        {
+            var careTaker = new DummyCareTaker();
+            careTaker.Save(new Dummy());
+
+            var commands = new Commands(Assembly.GetAssembly(typeof(CommandTests)));
+            commands.AddBinding(TestCommandName, "(AltLeft|AltRight) C");
+            commands.AddBinding(HalloCommandName, "(AltLeft|AltRight) T");
+
+            commands.Handle("AltRight", careTaker);
+            commands.Handle("C", careTaker);
+
+            commands.InvokeLast(careTaker);
+
+            commands.Handle("AltRight", careTaker);
+            commands.Handle("T", careTaker);
+
+            careTaker.Undo();
+
+            Assert.IsTrue(true);
         }
     }
 }
