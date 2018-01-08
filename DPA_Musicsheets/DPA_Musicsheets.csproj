@@ -109,7 +109,7 @@
     <Compile Include="Commands\InsertTimeCommand.cs" />
     <Compile Include="Commands\InsertTempoCommand.cs" />
     <Compile Include="Convertors\SheetToWPFConverter.cs" />
-    <Compile Include="Editor\CommandNames.cs" />
+    <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\EditorMemento.cs" />
     <Compile Include="Managers\MidiSequenceEventArgs.cs" />
     <Compile Include="Managers\WPFStaffsEventArgs.cs" />

@@ -59,7 +59,7 @@ namespace Core.Util
 
             var typeName = GetTypeName<TImplements>();
 
-            return assembly.DefinedTypes.Where(match);
+            return assembly.DefinedTypes.Where(match).Where(x => !x.IsAbstract);
         }
 
         static IEnumerable<T> CreateInstancesList<T>(Assembly useAssembly, Func<TypeInfo, bool> predicate = null)
@@ -70,7 +70,7 @@ namespace Core.Util
             var interfaceName = GetTypeName<T>();
 
             // find all the implementations of T in the given Assembly
-            var types = useAssembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(T))).Where(predicate);
+            var types = useAssembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(T)) && !t.IsAbstract).Where(predicate);
 
             // create a new collection of instances using the Activator.
             // we cast the new instance to T to make sure everything stays generic

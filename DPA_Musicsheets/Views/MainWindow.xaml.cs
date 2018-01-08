@@ -32,6 +32,8 @@ namespace DPA_Musicsheets
         public MainWindow()
         {
             InitializeComponent();
+
+            var h = Editor.Commands.Factory;
         }
     }
 }

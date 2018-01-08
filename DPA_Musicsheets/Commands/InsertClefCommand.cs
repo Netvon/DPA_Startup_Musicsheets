@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Commands
 {
-    [CommandBinding(Name = CommandNames.InsertTempoCommandName)]
+    [CommandBinding(Name = Editor.Commands.InsertClefTrebleCommandNames)]
     class InsertClefCommand : ICommand
     {
         public bool CanInvoke<T>(CareTaker<T> careTaker) => true;

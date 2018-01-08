@@ -12,19 +12,19 @@ namespace Core.Editor
     public class Commands
     {
         Dictionary<string, ICommand> nameBindings;
-        Dictionary<string, KeyBind> keyBindings;
+        List<KeyValuePair<string, KeyBind>> keyBindings;
 
         ICommand last;
 
         public Commands(Assembly assembly)
         {
             nameBindings = All(assembly);
-            keyBindings = new Dictionary<string, KeyBind>();
+            keyBindings = new List<KeyValuePair<string, KeyBind>>();
         }
 
         public void AddBinding(string name, string pattern)
         {
-            keyBindings.Add(name, new KeyBind(pattern));
+            keyBindings.Add(new KeyValuePair<string, KeyBind>(name, new KeyBind(pattern)));
         }
 
         public bool Handle<T>(string key, CareTaker<T> careTaker)

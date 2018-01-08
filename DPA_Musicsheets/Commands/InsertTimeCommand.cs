@@ -33,7 +33,7 @@ namespace DPA_Musicsheets.Commands
         }
     }
 
-    [CommandBinding(Name = CommandNames.InsertTime44CommandName)]
+    [CommandBinding(Name = Editor.Commands.InsertTime44CommandName)]
     class InsertTime44Command : InsertTimeCommand
     {
         public InsertTime44Command() : base(4, 4)
@@ -41,7 +41,7 @@ namespace DPA_Musicsheets.Commands
         }
     }
 
-    [CommandBinding(Name = CommandNames.InsertTime34CommandName)]
+    [CommandBinding(Name = Editor.Commands.InsertTime34CommandName)]
     class InsertTime34Command : InsertTimeCommand
     {
         public InsertTime34Command() : base(3, 4)
@@ -49,7 +49,7 @@ namespace DPA_Musicsheets.Commands
         }
     }
 
-    [CommandBinding(Name = CommandNames.InsertTime68CommandName)]
+    [CommandBinding(Name = Editor.Commands.InsertTime68CommandName)]
     class InsertTime68Command : InsertTimeCommand
     {
         public InsertTime68Command() : base(6, 8)

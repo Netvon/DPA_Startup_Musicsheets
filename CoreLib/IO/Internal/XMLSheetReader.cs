@@ -51,6 +51,11 @@ namespace Core.IO.Internal
             return Task.FromResult(builder.Build());
         }
 
+        public Task<Sheet> ReadFromStringAsync(string lines)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetFilePath(string path)
         {
             if (string.IsNullOrEmpty(path))

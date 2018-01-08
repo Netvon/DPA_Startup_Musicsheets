@@ -21,6 +21,11 @@ namespace CoreTests
             throw new NotImplementedException();
         }
 
+        public Task<Sheet> ReadFromStringAsync(string lines)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetFilePath(string path)
         {
             throw new NotImplementedException();
