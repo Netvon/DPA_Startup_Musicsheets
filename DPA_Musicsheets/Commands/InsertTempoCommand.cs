@@ -22,6 +22,7 @@ namespace DPA_Musicsheets.Commands
                 var clone = ect.Current.Clone() as EditorMemento;
 
                 clone.InsertText("\\tempo 4=120");
+                ect.Save(clone);
             }
         }
     }

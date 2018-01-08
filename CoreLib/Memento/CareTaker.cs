@@ -60,5 +60,7 @@ namespace Core.Memento
                 return currentSheet.Value;
             }
         }
+
+        public bool HasChanges => mementoList.Count > 1;
     }
 }

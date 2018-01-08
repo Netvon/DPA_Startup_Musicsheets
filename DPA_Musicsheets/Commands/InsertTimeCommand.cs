@@ -27,6 +27,8 @@ namespace DPA_Musicsheets.Commands
                 var clone = ect.Current.Clone() as EditorMemento;
 
                 clone.InsertText($"\\time {time}");
+
+                ect.Save(clone);
             }
         }
     }
