@@ -10,7 +10,7 @@ namespace Core.Commands
 {
     public interface ICommand
     {
-        void Invoke<T>(Memento<T> memento);
-        bool CanInvoke();
+        void Invoke<T>(CareTaker<T> careTaker);
+        bool CanInvoke<T>(CareTaker<T> careTaker);
     }
 }

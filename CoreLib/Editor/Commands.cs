@@ -27,7 +27,7 @@ namespace Core.Editor
             keyBindings.Add(name, new KeyBind(pattern));
         }
 
-        public bool Handle<T>(string key, Memento<T> memento)
+        public bool Handle<T>(string key, CareTaker<T> careTaker)
         {
             bool didCommand = false;
 
@@ -37,9 +37,9 @@ namespace Core.Editor
                 {
                     last = nameBindings[keyBinding.Key];
 
-                    if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke() == true)
+                    if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke(careTaker) == true)
                     {
-                        last?.Invoke(memento);
+                        last?.Invoke(careTaker);
                         didCommand = true;
                     }
                 }
@@ -53,11 +53,11 @@ namespace Core.Editor
 
         public bool HasLastCommand => last != null;
 
-        public void InvokeLast<T>(Memento<T> memento)
+        public void InvokeLast<T>(CareTaker<T> careTaker)
         {
-            if (last?.CanInvoke() == true)
+            if (last?.CanInvoke(careTaker) == true)
             {
-                last.Invoke(memento);
+                last.Invoke(careTaker);
                 Reset();
             }
         }
