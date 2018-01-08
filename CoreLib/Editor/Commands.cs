@@ -27,9 +27,12 @@ namespace Core.Editor
         {
             this.pattern = pattern;
 
-            keys = pattern.Split(' ');
+            keys = pattern.ToString().Split(' ');
             matchesRequired = keys.Length;
         }
+
+        public bool IsMatch => matches == matchesRequired;
+        public bool HasPartialMatch => matches != 0 && matches != matchesRequired;
 
         public bool Match(string keyInput)
         {
@@ -45,6 +48,10 @@ namespace Core.Editor
                     return true;
                 }
             }
+            else if( matches > 0)
+            {
+                Reset();
+            }
 
             return false;
         }
@@ -59,6 +66,8 @@ namespace Core.Editor
     {
         Dictionary<string, ICommand> nameBindings;
         Dictionary<string, KeyBind> keyBindings;
+
+        ICommand last;
 
         public Commands(Assembly assembly)
         {
@@ -79,15 +88,36 @@ namespace Core.Editor
             {
                 if(keyBinding.Value.Match(key))
                 {
-                    nameBindings[keyBinding.Key].Invoke();
-                    didCommand = true;
+                    last = nameBindings[keyBinding.Key];
+
+                    if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke() == true)
+                    {
+                        last?.Invoke();
+                        didCommand = true;
+                    }
                 }
             }
 
             if (didCommand)
-                foreach (var keyBinding in keyBindings) { keyBinding.Value.Reset(); }
+                Reset();
 
             return didCommand;
+        }
+
+        public bool HasLastCommand => last != null;
+
+        public void InvokeLast()
+        {
+            if (last?.CanInvoke() == true)
+            {
+                last.Invoke();
+                Reset();
+            }
+        }
+
+        void Reset()
+        {
+            foreach (var keyBinding in keyBindings) { keyBinding.Value.Reset(); }
         }
 
         public IEnumerable<string> CommandNames => nameBindings.Keys;

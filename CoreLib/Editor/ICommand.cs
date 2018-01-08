@@ -10,5 +10,6 @@ namespace Core.Commands
     public interface ICommand
     {
         void Invoke();
+        bool CanInvoke();
     }
 }
