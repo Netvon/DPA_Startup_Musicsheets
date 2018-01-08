@@ -10,7 +10,6 @@ namespace Core.Memento
 {
     public class Memento<T>
     {
-
         private readonly LinkedList<T> sheetList;
         private LinkedListNode<T> currentSheet;
 
@@ -26,11 +25,12 @@ namespace Core.Memento
                 sheetList.AddFirst(memento);
                 currentSheet = sheetList.First;
             }
-            else if (memento.Equals(currentSheet.Value))
+            else if (!memento.Equals(currentSheet.Value))
             {
                 currentSheet = currentSheet.ReplaceNext(memento);
             }
         }
+
         public T Redo()
         {
             if (!CanUndo)
@@ -38,6 +38,7 @@ namespace Core.Memento
             currentSheet = currentSheet.Previous;
             return currentSheet.Value;
         }
+
         public T Undo()
         {
             if (!CanRedo)
