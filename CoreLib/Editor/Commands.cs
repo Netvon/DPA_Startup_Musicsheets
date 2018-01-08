@@ -1,67 +1,13 @@
 ﻿using Core.Commands;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Util;
-using System.Text.RegularExpressions;
 
 namespace Core.Editor
 {
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class CommandBindingAttribute : Attribute
-    {
-        public string Name { get; set; }
-    }
-
-    public class KeyBind
-    {
-        string[] keys;
-        int matches;
-        int matchesRequired;
-        string pattern;
-
-        public KeyBind(string pattern)
-        {
-            this.pattern = pattern;
-
-            keys = pattern.ToString().Split(' ');
-            matchesRequired = keys.Length;
-        }
-
-        public bool IsMatch => matches == matchesRequired;
-        public bool HasPartialMatch => matches != 0 && matches != matchesRequired;
-
-        public bool Match(string keyInput)
-        {
-            var key = keys[matches];
-
-            if(Regex.Match(keyInput, key).Success)
-            {
-                matches++;
-
-                if(matches == matchesRequired)
-                {
-                    Reset();
-                    return true;
-                }
-            }
-            else if( matches > 0)
-            {
-                Reset();
-            }
-
-            return false;
-        }
-
-        public void Reset()
-        {
-            matches = 0;
-        }
-    }
-
     public class Commands
     {
         Dictionary<string, ICommand> nameBindings;
