@@ -31,7 +31,9 @@ namespace Core.Builder.Internal.Lilypond
 
                 if (values.Length == 2)
                 {
-                    builder.AddTimeSignature(uint.Parse(values[0]), uint.Parse(values[1]));
+                    if(uint.TryParse(values[1], out var result1) && uint.TryParse(values[1], out var result2)) {
+                        builder.AddTimeSignature(result1, result2);
+                    }
 
                     contextActive = false;
                 }
