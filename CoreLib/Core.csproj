@@ -80,6 +80,7 @@
     <Compile Include="IO\SheetReaderFactory.cs" />
     <Compile Include="IO\SheetWriterAttribute.cs" />
     <Compile Include="IO\SheetWriterFactory.cs" />
+    <Compile Include="Memento\IMemento.cs" />
     <Compile Include="Models\Bar.cs" />
     <Compile Include="Models\MSNote.cs" />
     <Compile Include="Models\NoteModifier.cs" />
