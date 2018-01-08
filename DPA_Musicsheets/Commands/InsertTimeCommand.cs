@@ -24,7 +24,7 @@ namespace DPA_Musicsheets.Commands
         {
             if (careTaker is EditorCareTaker ect)
             {
-                var clone = ect.Current.Clone() as EditorMemento;
+                var clone = ect.Current?.Clone() as EditorMemento ?? new EditorMemento();
 
                 clone.InsertText($"\\time {time}");
 

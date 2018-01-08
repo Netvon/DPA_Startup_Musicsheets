@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,8 @@ namespace DPA_Musicsheets.ViewModels
     {
         private FileHandler _fileHandler;
         private EditorCareTaker careTaker;
-        private SheetWriterFactory writerFactory; 
+        private SheetWriterFactory writerFactory;
+        private Core.Editor.Commands commands = Editor.Commands.Factory;
 
         private string _text;
         private string _previousText;
@@ -47,12 +49,14 @@ namespace DPA_Musicsheets.ViewModels
         private DateTime _lastChange;
         private static int MILLISECONDS_BEFORE_CHANGE_HANDLED = 1500;
         private bool _waitingForRender = false;
+        private int _cursorLocation;
 
         public LilypondViewModel(FileHandler fileHandler)
         {
             _fileHandler = fileHandler;
             writerFactory = new SheetWriterFactory();
             careTaker = new EditorCareTaker();
+            careTaker.MementoChanged += CareTaker_MementoChanged;
 
             _fileHandler.LilypondTextChanged += (src, e) =>
             {
@@ -63,11 +67,24 @@ namespace DPA_Musicsheets.ViewModels
 
             _text = "Your lilypond text will appear here.";
         }
-        
+
+        void CareTaker_MementoChanged(object sender, EditorMemento e)
+        {
+            LilypondText = e.Text;
+        }
+
         public ICommand TextChangedCommand => new RelayCommand<TextChangedEventArgs>((args) =>
         {
             if (!_textChangedByLoad)
             {
+                if (args.Source is TextBox tb)
+                {
+                    CursorLocation = tb.CaretIndex;
+
+                    if(careTaker.Current != null)
+                        careTaker.Current.CursorIndex = CursorLocation;
+                }
+
                 _waitingForRender = true;
                 _lastChange = DateTime.Now;
                 MessengerInstance.Send(new CurrentStateMessage() { State = "Rendering..." });
@@ -87,19 +104,24 @@ namespace DPA_Musicsheets.ViewModels
 
         public RelayCommand UndoCommand => new RelayCommand(() =>
         {
-            LilypondText = careTaker.Undo().Text;
+            var editorMemento = careTaker.Undo();
+            CursorLocation = editorMemento.CursorIndex;
+            LilypondText = editorMemento.Text;
 
-            RaisePropertyChanged(nameof(RedoCommand));
-            RaisePropertyChanged(nameof(UndoCommand));
-        }, () => careTaker.CanUndo);
+            base.RaisePropertyChanged(nameof(RedoCommand));
+            base.RaisePropertyChanged(nameof(ViewModels.LilypondViewModel.UndoCommand));
+        }, (Func<bool>)(() => (bool)careTaker.CanUndo));
 
         public RelayCommand RedoCommand => new RelayCommand(() =>
         {
-            LilypondText = careTaker.Redo().Text;
+            var editorMemento = careTaker.Redo();
+            CursorLocation = editorMemento.CursorIndex;
 
-            RaisePropertyChanged(nameof(RedoCommand));
-            RaisePropertyChanged(nameof(UndoCommand));
-        }, () => careTaker.CanRedo);
+            LilypondText = editorMemento.Text;
+
+            base.RaisePropertyChanged(nameof(RedoCommand));
+            base.RaisePropertyChanged(nameof(ViewModels.LilypondViewModel.UndoCommand));
+        }, (Func<bool>)(() => (bool)careTaker.CanRedo));
 
         public ICommand SaveAsCommand => new RelayCommand(() =>
         {
@@ -110,5 +132,39 @@ namespace DPA_Musicsheets.ViewModels
                 writer.WriteToFile(careTaker.Current.MusicSheet);
             }
         });
+
+        Task inputWaitTask;
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
+
+        public ICommand KeyDownCommand => new RelayCommand<KeyEventArgs>((e) =>
+        {
+            tokenSource.Cancel();
+            tokenSource = new CancellationTokenSource();
+
+            var key = e.Key;
+            if (key == Key.System)
+                key = e.SystemKey;
+
+            var keyname = Enum.GetName(typeof(Key), key);
+
+            if (commands.Handle(keyname, careTaker))
+            {
+                inputWaitTask = Task.Delay(200).ContinueWith(
+                    (task, obj) =>
+                    {
+                        commands.InvokeLast(careTaker);
+                    }, tokenSource.Token);
+            }
+        });
+
+        public int CursorLocation
+        {
+            get => _cursorLocation;
+            set
+            {
+                _cursorLocation = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

@@ -9,9 +9,11 @@ using Core.Builder.Internal;
 
 namespace Core.IO.Internal
 {
-    [SheetReader(".ly", nameof(LilypondSheetReader))]
+    [SheetReader(Extension, nameof(LilypondSheetReader))]
     public class LilypondSheetReader : ISheetReader
     {
+        public const string Extension = ".ly";
+
         string filePath;
         public async Task<Sheet> ReadFromFileAsync()
         {
@@ -36,7 +38,7 @@ namespace Core.IO.Internal
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
-            if (!File.Exists(path))
+            if (!File.Exists(path) && path != Extension)
                 throw new ArgumentException("The given path does not exist", nameof(path));
 
             filePath = path;

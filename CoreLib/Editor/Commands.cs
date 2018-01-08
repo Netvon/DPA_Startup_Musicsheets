@@ -40,13 +40,11 @@ namespace Core.Editor
                     if (!keyBindings.Any(x => x.Value.HasPartialMatch) && last?.CanInvoke(careTaker) == true)
                     {
                         last?.Invoke(careTaker);
-                        didCommand = true;
+                        Reset();
                     }
+                    didCommand = true;
                 }
             }
-
-            if (didCommand)
-                Reset();
 
             return didCommand;
         }
@@ -62,7 +60,7 @@ namespace Core.Editor
             }
         }
 
-        void Reset()
+        public void Reset()
         {
             foreach (var keyBinding in keyBindings) { keyBinding.Value.Reset(); }
         }

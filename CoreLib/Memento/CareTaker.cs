@@ -10,6 +10,8 @@ namespace Core.Memento
 {
     public abstract class CareTaker<TMemento>
     {
+        public event EventHandler<TMemento> MementoChanged;
+
         readonly LinkedList<TMemento> mementoList;
         LinkedListNode<TMemento> currentSheet;
 
@@ -24,10 +26,14 @@ namespace Core.Memento
             {
                 mementoList.AddFirst(memento);
                 currentSheet = mementoList.First;
+
+                MementoChanged?.Invoke(this, currentSheet.Value);
             }
             else if (!memento.Equals(currentSheet.Value))
             {
                 currentSheet = currentSheet.ReplaceNext(memento);
+
+                MementoChanged?.Invoke(this, currentSheet.Value);
             }
         }
 

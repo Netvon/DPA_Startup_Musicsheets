@@ -11,12 +11,12 @@ namespace DPA_Musicsheets.Editor
 {
     public class EditorMemento : ICloneable
     {
-        Sheet _musicSheet;
-        string _text;
+        Sheet _musicSheet = new Sheet();
+        string _text = "";
 
         public Sheet MusicSheet => _musicSheet;
 
-        public string Text => Text;
+        public string Text => _text;
 
         public void SetMusicSheet(Sheet sheet)
         {

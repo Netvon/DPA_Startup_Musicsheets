@@ -31,7 +31,11 @@ namespace Core.Builder.Internal.Lilypond
 
                 if (values.Length == 2)
                 {
-                    builder.AddTempto(uint.Parse(values[1]));
+                    if(uint.TryParse(values[1], out var result))
+                    {
+                        builder.AddTempto(result);
+                    }
+
                     contextActive = false;
                 }
             }
