@@ -1,4 +1,8 @@
-﻿using DPA_Musicsheets.Managers;
+﻿using Core.IO;
+using Core.Memento;
+using Core.Models;
+using DPA_Musicsheets.Editor;
+using DPA_Musicsheets.Managers;
 using DPA_Musicsheets.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,6 +19,8 @@ namespace DPA_Musicsheets.ViewModels
     public class LilypondViewModel : ViewModelBase
     {
         private FileHandler _fileHandler;
+        private EditorCareTaker careTaker;
+        private SheetWriterFactory writerFactory; 
 
         private string _text;
         private string _previousText;
@@ -45,6 +51,8 @@ namespace DPA_Musicsheets.ViewModels
         public LilypondViewModel(FileHandler fileHandler)
         {
             _fileHandler = fileHandler;
+            writerFactory = new SheetWriterFactory();
+            careTaker = new EditorCareTaker();
 
             _fileHandler.LilypondTextChanged += (src, e) =>
             {
@@ -79,41 +87,27 @@ namespace DPA_Musicsheets.ViewModels
 
         public RelayCommand UndoCommand => new RelayCommand(() =>
         {
-            _nextText = LilypondText;
-            LilypondText = _previousText;
-            _previousText = null;
-        }, () => _previousText != LilypondText);
+            LilypondText = careTaker.Undo().Text;
+
+            RaisePropertyChanged(nameof(RedoCommand));
+            RaisePropertyChanged(nameof(UndoCommand));
+        }, () => careTaker.CanUndo);
 
         public RelayCommand RedoCommand => new RelayCommand(() =>
         {
-            _previousText = LilypondText;
-            LilypondText = _nextText;
-            _nextText = null;
-            RedoCommand.RaiseCanExecuteChanged();
-        }, () => _nextText != LilypondText);
+            LilypondText = careTaker.Redo().Text;
+
+            RaisePropertyChanged(nameof(RedoCommand));
+            RaisePropertyChanged(nameof(UndoCommand));
+        }, () => careTaker.CanRedo);
 
         public ICommand SaveAsCommand => new RelayCommand(() =>
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Midi|*.mid|Lilypond|*.ly|PDF|*.pdf" };
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Lilypond|*.ly|PDF|*.pdf" };
             if (saveFileDialog.ShowDialog() == true)
             {
-                string extension = Path.GetExtension(saveFileDialog.FileName);
-                if (extension.EndsWith(".mid"))
-                {
-                    _fileHandler.SaveToMidi(saveFileDialog.FileName);
-                }
-                else if (extension.EndsWith(".ly"))
-                {
-                    _fileHandler.SaveToLilypond(saveFileDialog.FileName);
-                }
-                else if (extension.EndsWith(".pdf"))
-                {
-                    _fileHandler.SaveToPDF(saveFileDialog.FileName);
-                }
-                else
-                {
-                    MessageBox.Show($"Extension {extension} is not supported.");
-                }
+                var writer = writerFactory.GetWriter(saveFileDialog.FileName);
+                writer.WriteToFile(careTaker.Current.MusicSheet);
             }
         });
     }
