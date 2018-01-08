@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Core.Util
 {
-    static class Reflection
+    public static class Reflection
     {
         static Dictionary<string, List<object>> instances = new Dictionary<string, List<object>>();
 
-        public static IEnumerable<T> GetInstancesOf<T>(Assembly useAssembly = null)
+        public static IEnumerable<T> GetInstancesOf<T>(Func<TypeInfo, bool> predicate = null, Assembly useAssembly = null)
         {
             // check if type paramenter T is an interface
             if (!typeof(T).IsInterface)
                 throw new ArgumentException("T must be an interface");
 
             // get the name of the inferface
-            var interfaceName = GetInterfaceName<T>();
+            var interfaceName = GetTypeName<T>();
 
             // get the stored list of intances for this interface
             var instList = GetInstancesList<T>();
@@ -32,28 +32,45 @@ namespace Core.Util
             var asm = useAssembly ?? typeof(Reflection).Assembly;
 
             // create a new List of Instances and return the result
-            return CreateInstancesList<T>(asm);
+            return CreateInstancesList<T>(asm, predicate);
         }
 
-        static string GetInterfaceName<T>()
+        static string GetTypeName<T>()
         {
             return typeof(T).Name;
         }
 
         static IEnumerable<T> GetInstancesList<T>()
         {
-            var interfaceName = GetInterfaceName<T>();
+            var interfaceName = GetTypeName<T>();
             var instList = instances.FirstOrDefault(i => i.Key == interfaceName).Value;
 
             return instList?.Select(t => (T)t);
         }
 
-        static IEnumerable<T> CreateInstancesList<T>(Assembly useAssembly)
+        public static IEnumerable<TypeInfo> GetInfo<TImplements>(Assembly assembly)
         {
-            var interfaceName = GetInterfaceName<T>();
+            bool isInterface = typeof(TImplements).IsInterface;
+
+            Func<TypeInfo, bool> match = (TypeInfo t) => t.ImplementedInterfaces.Contains(typeof(TImplements));
+
+            if(!isInterface)
+                match = (TypeInfo t) => t.BaseType == typeof(TImplements);
+
+            var typeName = GetTypeName<TImplements>();
+
+            return assembly.DefinedTypes.Where(match);
+        }
+
+        static IEnumerable<T> CreateInstancesList<T>(Assembly useAssembly, Func<TypeInfo, bool> predicate = null)
+        {
+            if (predicate == null)
+                predicate = (t) => true;
+
+            var interfaceName = GetTypeName<T>();
 
             // find all the implementations of T in the given Assembly
-            var types = useAssembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(T)));
+            var types = useAssembly.DefinedTypes.Where(t => t.ImplementedInterfaces.Contains(typeof(T))).Where(predicate);
 
             // create a new collection of instances using the Activator.
             // we cast the new instance to T to make sure everything stays generic
@@ -67,6 +84,11 @@ namespace Core.Util
             instances.Add(interfaceName, newInstancesList);
 
             return newInstancesListGeneric;
+        }
+
+        public static IEnumerable<TInstance> Instanciate<TInstance>(this IEnumerable<TypeInfo> info)
+        {
+            return info.Select(t => (TInstance)Activator.CreateInstance(t));
         }
     }
 }
