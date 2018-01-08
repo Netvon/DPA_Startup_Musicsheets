@@ -1,44 +1,44 @@
-﻿using Core.Memento;
+﻿using Core.Extensions;
 using Core.Models;
-using DPA_Musicsheets.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPA_Musicsheets.Memento
+namespace Core.Memento
 {
-    class LilypondManager : IMemento<Sheet>
+    public class Memento<T>
     {
-        private readonly LinkedList<Sheet> sheetList;
-        private LinkedListNode<Sheet> currentSheet;
 
-        public LilypondManager()
+        private readonly LinkedList<T> sheetList;
+        private LinkedListNode<T> currentSheet;
+
+        public Memento()
         {
-            sheetList = new LinkedList<Sheet>();
+            sheetList = new LinkedList<T>();
         }
 
-        public void Save(Sheet memento)
+        public void Save(T memento)
         {
             if (currentSheet == null)
             {
                 sheetList.AddFirst(memento);
                 currentSheet = sheetList.First;
             }
-            else if (memento != currentSheet.Value)
+            else if (memento.Equals(currentSheet.Value))
             {
                 currentSheet = currentSheet.ReplaceNext(memento);
             }
         }
-        public Sheet Redo()
+        public T Redo()
         {
             if (!CanUndo)
                 throw new IndexOutOfRangeException();
             currentSheet = currentSheet.Previous;
             return currentSheet.Value;
         }
-        public Sheet Undo()
+        public T Undo()
         {
             if (!CanRedo)
                 throw new IndexOutOfRangeException();
@@ -49,6 +49,5 @@ namespace DPA_Musicsheets.Memento
         public bool CanUndo => currentSheet?.Previous != null;
 
         public bool CanRedo => currentSheet?.Next != null;
-
     }
 }
