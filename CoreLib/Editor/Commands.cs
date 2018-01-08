@@ -27,7 +27,7 @@ namespace Core.Editor
             keyBindings.Add(name, new KeyBind(pattern));
         }
 
-        public bool Handle<T>(string key, IMemento<T> memento)
+        public bool Handle<T>(string key, Memento<T> memento)
         {
             bool didCommand = false;
 
@@ -53,7 +53,7 @@ namespace Core.Editor
 
         public bool HasLastCommand => last != null;
 
-        public void InvokeLast<T>(IMemento<T> memento)
+        public void InvokeLast<T>(Memento<T> memento)
         {
             if (last?.CanInvoke() == true)
             {

@@ -49,5 +49,7 @@ namespace Core.Memento
         public bool CanUndo => currentSheet?.Previous != null;
 
         public bool CanRedo => currentSheet?.Next != null;
+
+        public T Current => currentSheet.Value;
     }
 }
