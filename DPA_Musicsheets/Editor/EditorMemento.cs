@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Editor
 {
-    public class EditorMemento
+    public class EditorMemento : ICloneable
     {
         Sheet _musicSheet;
         string _text;
@@ -35,6 +35,8 @@ namespace DPA_Musicsheets.Editor
             var temp = _text.Insert(CursorIndex, add);
 
             SetText(temp);
+
+            CursorIndex += add.Length;
         }
 
         public void SetText(string text)
@@ -48,6 +50,16 @@ namespace DPA_Musicsheets.Editor
             {
                 _musicSheet = x.Result;
             });
+        }
+
+        public object Clone()
+        {
+            var temp = new EditorMemento();
+            temp._text = _text;
+            temp._musicSheet = _musicSheet;
+            temp.CursorIndex = CursorIndex;
+
+            return temp;
         }
 
         public int CursorIndex { get; set; }
