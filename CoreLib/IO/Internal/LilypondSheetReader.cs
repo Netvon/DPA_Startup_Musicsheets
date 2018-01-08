@@ -21,10 +21,15 @@ namespace Core.IO.Internal
                 lines = await reader.ReadToEndAsync();
             }
 
+            return await ReadFromStringAsync(lines);
+        }
+
+        public Task<Sheet> ReadFromStringAsync(string lines)
+        {
             var tokens = lines.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x));
 
             var builder = new LilypondSheetBuilder(tokens);
-            return builder.Build();
+            return Task.FromResult(builder.Build());
         }
 
         public void SetFilePath(string path)

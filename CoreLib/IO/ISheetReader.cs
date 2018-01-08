@@ -13,6 +13,7 @@ namespace Core.IO
         /// </summary>
         /// <returns></returns>
         Task<Sheet> ReadFromFileAsync();
+        Task<Sheet> ReadFromStringAsync(string lines);
 
         void SetFilePath(string path);
     }
