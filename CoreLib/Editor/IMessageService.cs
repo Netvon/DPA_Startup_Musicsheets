@@ -13,7 +13,7 @@ namespace Core.Editor
 
     public interface IMessageService
     {
-        AskQuestionResult Ask(string question);
+        AskQuestionResult Ask(string question, string catergory);
         void Info(string info);
         void Error(string error);
     }

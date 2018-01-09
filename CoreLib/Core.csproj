@@ -73,7 +73,7 @@
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\IFileService.cs" />
     <Compile Include="Editor\KeyBind.cs" />
-    <Compile Include="Editor\MessageService.cs" />
+    <Compile Include="Editor\IMessageService.cs" />
     <Compile Include="Extensions\LinkedListExtension.cs" />
     <Compile Include="IO\Internal\LilypondNoteConvertors.cs" />
     <Compile Include="IO\Internal\LilypondSheetWriter.cs" />

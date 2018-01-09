@@ -83,7 +83,7 @@ namespace Core.IO
             return null;
         }
 
-        public IEnumerable<string> GetAllSupportedExtension()
+        public IEnumerable<(string name, string ext)> GetAllSupportedExtension()
         {
             // Take all the Assemblies that are in the lookupAssemblies list
             // for each Assembly, find all defined types within
@@ -97,7 +97,7 @@ namespace Core.IO
                 // get the SheetReaderAttribute from this type
                 var attr = readerType.GetCustomAttribute<SheetWriterAttribute>();
 
-                yield return attr.HandleExtension;
+                yield return (attr.Name, attr.HandleExtension);
             }
         }
     }
