@@ -57,7 +57,6 @@ namespace DPA_Musicsheets.ViewModels
         {
             _fileHandler = fileHandler;
             writerFactory = new SheetWriterFactory();
-            careTaker = new EditorCareTaker();
 
             _fileHandler.LilypondTextChanged += (src, e) =>
             {
@@ -65,21 +64,24 @@ namespace DPA_Musicsheets.ViewModels
                 LilypondText = e.LilypondText;
                 _textChangedByLoad = false;
 
-                var temp = new EditorMemento();
-                temp.SetText(LilypondText);
-
-                careTaker.Save(temp);
+                CreateCareTaker();
             };
 
             _text = "Your lilypond text will appear here.";
 
+            CreateCareTaker();
+
+            this.fileService = fileService;
+            this.messageService = messageService;
+        }
+
+        void CreateCareTaker()
+        {
+            careTaker = new EditorCareTaker();
             var initial = new EditorMemento();
             initial.SetText(LilypondText);
             careTaker.Save(initial);
             careTaker.MementoChanged += CareTaker_MementoChanged;
-
-            this.fileService = fileService;
-            this.messageService = messageService;
         }
 
         void CareTaker_MementoChanged(object sender, EditorMemento e)
