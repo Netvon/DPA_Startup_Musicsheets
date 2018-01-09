@@ -109,6 +109,8 @@
     <Compile Include="Commands\InsertClefCommand.cs" />
     <Compile Include="Commands\InsertTimeCommand.cs" />
     <Compile Include="Commands\InsertTempoCommand.cs" />
+    <Compile Include="Commands\SaveToLilypondCommand.cs" />
+    <Compile Include="Commands\SaveToPdfCommand.cs" />
     <Compile Include="Convertors\SheetToWPFConverter.cs" />
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\EditorMemento.cs" />

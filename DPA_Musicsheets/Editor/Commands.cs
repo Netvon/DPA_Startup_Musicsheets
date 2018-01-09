@@ -30,6 +30,7 @@ namespace DPA_Musicsheets.Editor
                 temp.AddBinding(InsertTime44CommandName, "(LeftAlt|RightAlt) T 4");
                 temp.AddBinding(InsertTime34CommandName, "(LeftAlt|RightAlt) T 3");
                 temp.AddBinding(InsertTime68CommandName, "(LeftAlt|RightAlt) T 6");
+                temp.AddBinding(OpenFileCommandName, "(LeftCtrl|RightCtrl) O");
 
                 return temp;
             }

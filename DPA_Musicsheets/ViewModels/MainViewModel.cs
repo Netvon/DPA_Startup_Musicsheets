@@ -62,7 +62,7 @@ namespace DPA_Musicsheets.ViewModels
                 return $"{x.name}|{e}";
             });
 
-            var path = fileService.RequestWritePath(string.Join("|", extensions.ToArray()));
+            var path = fileService.RequestReadPath(string.Join("|", extensions.ToArray()));
 
             if(!string.IsNullOrWhiteSpace(path))
             {
