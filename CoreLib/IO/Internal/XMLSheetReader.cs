@@ -36,7 +36,7 @@ namespace Core.IO.Internal
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
-    [SheetReader("(.mxl|.xml)", nameof(XMLSheetReader))]
+    [SheetReader("(.mxl|.xml)", "MusicXML")]
     public class XMLSheetReader : ISheetReader
     {
         /// <summary>Path to the MIDI File</summary>

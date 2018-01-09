@@ -150,9 +150,16 @@ namespace DPA_Musicsheets.ViewModels
         public ICommand SaveAsCommand => new RelayCommand(() =>
         {
             var fact = new SheetWriterFactory();
-            var extensions = fact.GetAllSupportedExtension().Select(x => $"{x.name}|*{x.ext}");
+            var extensions = fact.GetAllSupportedExtension().Select(x => {
+                var e = $"*{x.ext}";
 
-            var path = fileService.RequestWritePath(string.Join("", extensions.ToArray()));
+                if (x.ext.StartsWith("(", StringComparison.InvariantCultureIgnoreCase))
+                    e = x.ext.Replace("(", "").Replace(")", "").Replace("|", ";").Replace(".", "*.");
+
+                return $"{x.name}|{e}";
+            });
+
+            var path = fileService.RequestWritePath(string.Join("|", extensions.ToArray()));
 
             if(!string.IsNullOrWhiteSpace(path))
             {

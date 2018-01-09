@@ -88,7 +88,7 @@ namespace DPA_Musicsheets.Managers
             double percentageOfBarReached = 0;
             bool startedNoteIsClosed = true;
 
-            for (int i = 0; i < sequence.Count(); i++)
+            for (int i = 0; i < sequence.Count; i++)
             {
                 Track track = sequence[i];
 

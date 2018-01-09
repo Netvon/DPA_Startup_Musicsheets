@@ -1,9 +1,12 @@
-﻿using DPA_Musicsheets.Managers;
+﻿using Core.Editor;
+using Core.IO;
+using DPA_Musicsheets.Managers;
 using DPA_Musicsheets.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DPA_Musicsheets.ViewModels
@@ -36,22 +39,36 @@ namespace DPA_Musicsheets.ViewModels
         }
 
         private FileHandler _fileHandler;
+        private readonly IFileService fileService;
 
-        public MainViewModel(FileHandler fileHandler)
+        public MainViewModel(FileHandler fileHandler, IFileService fileService)
         {
             _fileHandler = fileHandler;
             FileName = @"../../Files/Five_little_ducks.mxl";
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
+            this.fileService = fileService;
         }
 
         public ICommand OpenFileCommand => new RelayCommand(() =>
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "MusicXML or LilyPond files (*.ly *.mxl)|*.ly;*.mxl" };
-            if (openFileDialog.ShowDialog() == true)
+            var fact = new SheetReaderFactory();
+            var extensions = fact.GetAllSupportedExtension().Select(x => {
+                var e = $"*{x.ext}";
+
+                if(x.ext.StartsWith("(", StringComparison.InvariantCultureIgnoreCase))
+                    e = x.ext.Replace("(", "").Replace(")", "").Replace("|", ";").Replace(".", "*.");
+
+                return $"{x.name}|{e}";
+            });
+
+            var path = fileService.RequestWritePath(string.Join("|", extensions.ToArray()));
+
+            if(!string.IsNullOrWhiteSpace(path))
             {
-                FileName = openFileDialog.FileName;
+                FileName = path;
             }
+
         });
         public ICommand LoadCommand => new RelayCommand(() =>
         {
