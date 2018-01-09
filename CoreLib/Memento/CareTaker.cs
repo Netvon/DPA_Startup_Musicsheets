@@ -41,7 +41,7 @@ namespace Core.Memento
         {
             if (!CanRedo)
                 throw new IndexOutOfRangeException();
-            currentSheet = currentSheet.Previous;
+            currentSheet = currentSheet.Next;
             return currentSheet.Value;
         }
 
@@ -49,13 +49,13 @@ namespace Core.Memento
         {
             if (!CanUndo)
                 throw new IndexOutOfRangeException();
-            currentSheet = currentSheet.Next;
+            currentSheet = currentSheet.Previous;
             return currentSheet.Value;
         }
 
-        public bool CanUndo => currentSheet?.Next != null;
+        public bool CanUndo => currentSheet?.Previous != null;
 
-        public bool CanRedo => currentSheet?.Previous != null;
+        public bool CanRedo => currentSheet?.Next != null;
 
         public TMemento Current
         {
