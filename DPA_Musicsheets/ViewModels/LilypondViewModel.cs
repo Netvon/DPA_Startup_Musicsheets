@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
+using System.Reflection;
 
 namespace DPA_Musicsheets.ViewModels
 {
@@ -150,6 +151,8 @@ namespace DPA_Musicsheets.ViewModels
         public ICommand SaveAsCommand => new RelayCommand(() =>
         {
             var fact = new SheetWriterFactory();
+            fact.AddAssembly(Assembly.GetAssembly(typeof(LilypondViewModel)));
+
             var extensions = fact.GetAllSupportedExtension().Select(x => {
                 var e = $"*{x.ext}";
 

@@ -47,6 +47,7 @@ namespace DPA_Musicsheets.ViewModels
             FileName = @"../../Files/Five_little_ducks.mxl";
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
+            MessengerInstance.Register<CurrentPathMessage>(this, (path) => FileName = path.FilePath);
             this.fileService = fileService;
         }
 
