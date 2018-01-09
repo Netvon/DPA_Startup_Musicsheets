@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DPA_Musicsheets.ViewModels
@@ -39,6 +40,17 @@ namespace DPA_Musicsheets.ViewModels
             }
         }
 
+        private string _currentError;
+        public string CurrentError
+        {
+            get { return _currentError; }
+            set
+            {
+                _currentError = value;
+                RaisePropertyChanged(nameof(CurrentError));
+            }
+        }
+
         private FileHandler _fileHandler;
         private readonly IFileService fileService;
 
@@ -49,6 +61,15 @@ namespace DPA_Musicsheets.ViewModels
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
             MessengerInstance.Register<CurrentPathMessage>(this, (path) => FileName = path.FilePath);
+            MessengerInstance.Register<ErrorMessage>(this, (err) => {
+                CurrentError = err.Exception.Message;
+
+                Task.Delay(5000).ContinueWith(x =>
+                {
+                    if(CurrentError == err.Exception.Message)
+                        CurrentError = "";
+                });
+            });
             this.fileService = fileService;
         }
 

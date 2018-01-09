@@ -28,8 +28,8 @@ namespace DPA_Musicsheets.Managers
             string tempFileName = $"{directory}\temp -{date}.ly";
             string lilypondLocation = @"C:\Program Files (x86)\LilyPond\usr\bin\lilypond.exe";
 
-            if(!File.Exists(lilypondLocation))
-                return;
+            if (!File.Exists(lilypondLocation))
+                throw new Exception("Lilypond.exe not found, conversion not possible");
 
             var writer = factory.GetWriter(tempFileName);
 
