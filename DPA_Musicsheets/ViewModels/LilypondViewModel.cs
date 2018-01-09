@@ -200,11 +200,14 @@ namespace DPA_Musicsheets.ViewModels
         {
             base.Cleanup();
 
-            var result = messageService.Ask("You have changes in you're lilypond, you want to save it?", "Unsaved Changes");
-
-            if(result == AskQuestionResult.Yes)
+            if (careTaker.HasChanges)
             {
-                SaveAsCommand.Execute(null);
+                var result = messageService.Ask("You have changes in you're lilypond, you want to save it?", "Unsaved Changes");
+
+                if (result == AskQuestionResult.Yes)
+                {
+                    SaveAsCommand.Execute(null);
+                }
             }
         }
     }
