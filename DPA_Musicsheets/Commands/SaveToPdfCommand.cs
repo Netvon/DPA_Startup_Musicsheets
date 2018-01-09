@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Commands
 {
-    [CommandBinding(Name = Editor.Commands.OpenFileCommandName)]
+    [CommandBinding(Name = Editor.Commands.SavePdfFileCommandName)]
     class SaveToPdfCommand : ICommand
     {
-        public bool CanInvoke<T>(CareTaker<T> careTaker)
-        {
-            throw new NotImplementedException();
-        }
+        public bool CanInvoke<T>(CareTaker<T> careTaker) => true;
 
         public void Invoke<T>(CareTaker<T> careTaker)
         {

@@ -10,7 +10,8 @@ namespace DPA_Musicsheets.Editor
     public static class Commands
     {
         public const string InsertTimeCommandName = "insert_time";
-        public const string SaveFileCommandName = "save_file";
+        public const string SavePdfFileCommandName = "save_pdf_file";
+        public const string SaveLilypondFileCommandName = "save_lilypond_file";
         public const string OpenFileCommandName = "open_file";
         public const string InsertClefTrebleCommandNames = "inser_clef_treble";
         public const string InsertTempoCommandName = "insert_tempo";
@@ -31,6 +32,8 @@ namespace DPA_Musicsheets.Editor
                 temp.AddBinding(InsertTime34CommandName, "(LeftAlt|RightAlt) T 3");
                 temp.AddBinding(InsertTime68CommandName, "(LeftAlt|RightAlt) T 6");
                 temp.AddBinding(OpenFileCommandName, "(LeftCtrl|RightCtrl) O");
+                temp.AddBinding(SaveLilypondFileCommandName, "(LeftCtrl|RightCtrl) S");
+                temp.AddBinding(SavePdfFileCommandName, "(LeftCtrl|RightCtrl) S P");
 
                 return temp;
             }

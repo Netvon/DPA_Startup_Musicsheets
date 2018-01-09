@@ -2,6 +2,7 @@
 using Core.Editor;
 using Core.IO;
 using Core.Memento;
+using DPA_Musicsheets.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -34,7 +35,7 @@ namespace DPA_Musicsheets.Commands
 
             if (!string.IsNullOrWhiteSpace(path))
             {
-                Messenger.Default.Send(new CurrentPathMessage() { FilePath = "your path here" });
+                Messenger.Default.Send(new CurrentPathMessage() { FilePath = path });
             }
         }
     }
