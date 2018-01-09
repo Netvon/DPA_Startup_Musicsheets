@@ -24,7 +24,14 @@ namespace DPA_Musicsheets.Editor
 
             var factory = new SheetWriterFactory();
             var writer = factory.GetWriter(".ly");
-            _text = writer.WriteToString(_musicSheet).Result;
+
+            try
+            {
+                _text = writer.WriteToString(_musicSheet).Result;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void InsertText(string add)
@@ -43,7 +50,13 @@ namespace DPA_Musicsheets.Editor
             var factory = new SheetReaderFactory();
             var writer = factory.GetReader(".ly");
 
-            _musicSheet = writer.ReadFromStringAsync(_text).Result;
+            try
+            {
+                _musicSheet = writer.ReadFromStringAsync(_text).Result;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public object Clone()

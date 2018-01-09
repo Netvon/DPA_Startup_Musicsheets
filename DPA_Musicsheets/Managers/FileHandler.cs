@@ -14,6 +14,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using DPA_Musicsheets.Convertors;
 using Core.IO;
+using GalaSoft.MvvmLight.Messaging;
+using DPA_Musicsheets.Messages;
 
 namespace DPA_Musicsheets.Managers
 {
@@ -62,19 +64,28 @@ namespace DPA_Musicsheets.Managers
             MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
         }
 
-        async public Task textChanged(string lilypondText)
+        async public Task TextChanged(string lilypondText)
         {
             var sheetReaderFactory = new SheetReaderFactory();
             var sheetReader = sheetReaderFactory.GetReader(".ly");
-            var sheet = await sheetReader.ReadFromStringAsync(lilypondText);
-            var converter = new SheetToWPFConverter();
 
-            WPFStaffs.Clear();
-            WPFStaffs.AddRange(converter.ConvertSheet(sheet));
-            WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
+            try
+            {
+                var sheet = await sheetReader.ReadFromStringAsync(lilypondText);
+                var converter = new SheetToWPFConverter();
 
-            MidiSequence = GetSequenceFromWPFStaffs();
-            MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
+                WPFStaffs.Clear();
+                WPFStaffs.AddRange(converter.ConvertSheet(sheet));
+                WPFStaffsChanged?.Invoke(this, new WPFStaffsEventArgs() { Symbols = WPFStaffs });
+
+                MidiSequence = GetSequenceFromWPFStaffs();
+                MidiSequenceChanged?.Invoke(this, new MidiSequenceEventArgs() { MidiSequence = MidiSequence });
+            }
+            catch (Exception)
+            {
+                Messenger.Default.Send(new CurrentStateMessage() { State = "Error parsing lilypond" });
+            }
+            
         }
 
         private Sequence GetSequenceFromWPFStaffs()

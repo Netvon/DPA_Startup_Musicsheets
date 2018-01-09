@@ -116,7 +116,7 @@ namespace DPA_Musicsheets.ViewModels
                         UndoCommand.RaiseCanExecuteChanged();
                         RedoCommand.RaiseCanExecuteChanged();
 
-                        await _fileHandler.textChanged(LilypondText);
+                        await _fileHandler.TextChanged(LilypondText);
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext()); // Request from main thread.
             }
