@@ -20,6 +20,8 @@ namespace DPA_Musicsheets.ViewModels
             SimpleIoc.Default.Register<StaffsViewModel>();
             SimpleIoc.Default.Register<MidiPlayerViewModel>();
 
+            
+
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();

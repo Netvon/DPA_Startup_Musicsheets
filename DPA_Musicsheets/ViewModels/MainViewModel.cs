@@ -4,6 +4,7 @@ using DPA_Musicsheets.Managers;
 using DPA_Musicsheets.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
 using System.Linq;
@@ -47,6 +48,7 @@ namespace DPA_Musicsheets.ViewModels
             FileName = @"../../Files/Five_little_ducks.mxl";
 
             MessengerInstance.Register<CurrentStateMessage>(this, (message) => CurrentState = message.State);
+            MessengerInstance.Register<CurrentPathMessage>(this, (path) => FileName = path.FilePath);
             this.fileService = fileService;
         }
 

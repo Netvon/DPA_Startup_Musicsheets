@@ -57,6 +57,7 @@ namespace DPA_Musicsheets.Editor
         }
 
         public int CursorIndex { get; set; }
+        public string FilePath { get; set; }
     }
 
     class EditorCareTaker : CareTaker<EditorMemento>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Core.IO
 {
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class SheetWriterAttribute : Attribute
+    public sealed class SheetWriterAttribute : Attribute
     {
         public SheetWriterAttribute(string handleExtension, string name)
         {
