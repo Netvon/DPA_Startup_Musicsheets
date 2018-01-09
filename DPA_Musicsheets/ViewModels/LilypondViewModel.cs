@@ -28,8 +28,6 @@ namespace DPA_Musicsheets.ViewModels
         private Core.Editor.Commands commands = Editor.Commands.Factory;
 
         private string _text;
-        private string _previousText;
-        private string _nextText;
 
         private bool _textChangedByLoad;
         private DateTime _lastChange;
@@ -50,10 +48,6 @@ namespace DPA_Musicsheets.ViewModels
             }
             set
             {
-                if (!_waitingForRender && !_textChangedByLoad)
-                {
-                    _previousText = _text;
-                }
                 _text = value;
                 RaisePropertyChanged(() => LilypondText);
             }
@@ -68,7 +62,7 @@ namespace DPA_Musicsheets.ViewModels
             _fileHandler.LilypondTextChanged += (src, e) =>
             {
                 _textChangedByLoad = true;
-                LilypondText = _previousText = e.LilypondText;
+                LilypondText = e.LilypondText;
                 _textChangedByLoad = false;
 
                 var temp = new EditorMemento();
@@ -114,14 +108,15 @@ namespace DPA_Musicsheets.ViewModels
                 _lastChange = DateTime.Now;
                 MessengerInstance.Send(new CurrentStateMessage() { State = "Rendering..." });
 
-                Task.Delay(MILLISECONDS_BEFORE_CHANGE_HANDLED).ContinueWith((task) =>
+                Task.Delay(MILLISECONDS_BEFORE_CHANGE_HANDLED).ContinueWith(async (task) =>
                 {
                     if ((DateTime.Now - _lastChange).TotalMilliseconds >= MILLISECONDS_BEFORE_CHANGE_HANDLED)
                     {
                         _waitingForRender = false;
                         UndoCommand.RaiseCanExecuteChanged();
+                        RedoCommand.RaiseCanExecuteChanged();
 
-                        _fileHandler.LoadLilypond(LilypondText);
+                        await _fileHandler.textChanged(LilypondText);
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext()); // Request from main thread.
             }
