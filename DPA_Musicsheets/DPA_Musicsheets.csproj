@@ -105,6 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\FileCommand.cs" />
     <Compile Include="Commands\InsertClefCommand.cs" />
     <Compile Include="Commands\InsertTimeCommand.cs" />
     <Compile Include="Commands\InsertTempoCommand.cs" />
