@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets.Messages
 {
-    class CurrentPathMessage
+    public class CurrentPathMessage
     {
         public string FilePath { get; set; }
     }
