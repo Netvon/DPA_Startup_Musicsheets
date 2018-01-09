@@ -1,110 +1,232 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DPA_Musicsheets.Convertors.SheetToWPFConverter">
-    <Position X="7.5" Y="2.5" Width="1.5" />
+  <Class Name="DPA_Musicsheets.Commands.InsertClefCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\InsertClefCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.InsertTempoCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\InsertTempoCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.InsertTimeCommand" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\InsertTimeCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.InsertTime44Command" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\InsertTimeCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.InsertTime34Command" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\InsertTimeCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.InsertTime68Command" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\InsertTimeCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.OpenFileCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\OpenFileCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.SaveToLilypondCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\SaveToLilypondCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Commands.SaveToPdfCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Commands\SaveToPdfCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Convertors.SheetToWPFConverter" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Convertors\SheetToWPFConverter.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DPA_Musicsheets.Editor.Commands" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAgAIAAAOEgAAAAAAAAAAIAAAACAAAA=</HashCode>
+      <FileName>Editor\Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DPA_Musicsheets.Editor.EditorMemento" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAEAAIAAAAAIAAAAAAAIAABoCAAAABA=</HashCode>
+      <FileName>Editor\EditorMemento.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Editor.EditorCareTaker" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\EditorMemento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DPA_Musicsheets.Editor.WPFFileService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\WPFFileService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DPA_Musicsheets.Editor.WPFMessageService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Editor\WPFMessageService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="DPA_Musicsheets.Managers.FileHandler" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAgQACAEACAIAACgAABAAIECIKCAAEAAAACCBQAAAAA=</HashCode>
       <FileName>Managers\FileHandler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Managers.LilypondEventArgs" Collapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="12.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>Managers\LilypondEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Managers.MidiSequenceEventArgs" Collapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+    <Position X="16.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>Managers\MidiSequenceEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DPA_Musicsheets.Managers.PDFSheetWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAEAEAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\PDFSheetWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="DPA_Musicsheets.Managers.WPFStaffsEventArgs" Collapsed="true">
-    <Position X="7.5" Y="3.5" Width="1.5" />
+    <Position X="9.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>Managers\WPFStaffsEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DPA_Musicsheets.Messages.CurrentPathMessage" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Messages\CurrentPathMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="DPA_Musicsheets.Messages.CurrentStateMessage" Collapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="12.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Messages\CurrentStateMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Models.LilypondToken" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="14.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAgA=</HashCode>
       <FileName>Models\LilypondToken.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Properties.Resources" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+    <Position X="11" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Properties.Settings" Collapsed="true">
-    <Position X="5.75" Y="2.5" Width="1.5" />
+    <Position X="16.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.ViewModels.LilypondViewModel" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+    <Position X="7.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABICAAAAAKAAAQAAAAIACAAIAAIAIIAAAAAAAEAAA=</HashCode>
+      <HashCode>AAABICACAiILABIQAAAAIECAAIAQIAIIAAAAAMAkAAA=</HashCode>
       <FileName>ViewModels\LilypondViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.ViewModels.MainViewModel" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+    <Position X="9.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACABQQIAAAACAABAAAAAIAAAAAAABAEBA=</HashCode>
+      <HashCode>AAAAAAAAAAACABQQIAAAACAABAAAAAIAAAAAAABgEBA=</HashCode>
       <FileName>ViewModels\MainViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.ViewModels.MidiPlayerViewModel" Collapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+    <Position X="14.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAgAQAAAAQAAAAAAAAAAAABAAAEBEARA=</HashCode>
       <FileName>ViewModels\MidiPlayerViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.ViewModels.StaffsViewModel" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="9.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\StaffsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.ViewModels.ViewModelLocator" Collapsed="true">
-    <Position X="4" Y="3.5" Width="1.5" />
+    <Position X="12.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACBAAACAAAAAACAAAAAAAAEAAAAA=</HashCode>
       <FileName>ViewModels\ViewModelLocator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MidiPlayerTest.App" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DPA_Musicsheets.Views.LilypondViewerCtrl" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="16.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\LilypondViewerCtrl.xaml.cs</FileName>
@@ -112,7 +234,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DPA_Musicsheets.Views.MidiPlayerCtrl" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.5" Y="1.5" Width="1.5" />
+    <Position X="12.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\MidiPlayerCtrl.xaml.cs</FileName>
@@ -120,7 +242,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DPA_Musicsheets.Views.StaffViewerCtrl" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="3.5" Width="1.5" />
+    <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\StaffViewCtrl.xaml.cs</FileName>
@@ -128,7 +250,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DPA_Musicsheets.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="1.5" Width="1.5" />
+    <Position X="11" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\MainWindow.xaml.cs</FileName>
@@ -136,7 +258,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DPA_Musicsheets.Visitor.Visitor" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="3.5" Width="1.5" />
+    <Position X="14.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Visitor\Visitor.cs</FileName>
@@ -144,7 +266,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Enum Name="DPA_Musicsheets.Models.LilypondTokenKind" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="7.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAECAAAAAAAAAAAAEACRA=</HashCode>
       <FileName>Models\LilypondTokenKind.cs</FileName>
