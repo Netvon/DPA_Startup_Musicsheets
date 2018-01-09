@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Editor
 {
-    interface IFileService
+    public interface IFileService
     {
         string RequestReadPath(string filter);
         string RequestWritePath(string filter);

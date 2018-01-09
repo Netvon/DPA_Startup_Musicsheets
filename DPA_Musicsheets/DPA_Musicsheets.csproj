@@ -111,6 +111,8 @@
     <Compile Include="Convertors\SheetToWPFConverter.cs" />
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\EditorMemento.cs" />
+    <Compile Include="Editor\WPFFileService.cs" />
+    <Compile Include="Editor\WPFMessageService.cs" />
     <Compile Include="Managers\MidiSequenceEventArgs.cs" />
     <Compile Include="Managers\WPFStaffsEventArgs.cs" />
     <Compile Include="Managers\LilypondEventArgs.cs" />

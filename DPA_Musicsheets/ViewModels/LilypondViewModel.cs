@@ -1,4 +1,5 @@
-﻿using Core.IO;
+﻿using Core.Editor;
+using Core.IO;
 using Core.Memento;
 using Core.Models;
 using DPA_Musicsheets.Editor;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace DPA_Musicsheets.ViewModels
 {
@@ -27,6 +29,17 @@ namespace DPA_Musicsheets.ViewModels
         private string _text;
         private string _previousText;
         private string _nextText;
+
+        private bool _textChangedByLoad;
+        private DateTime _lastChange;
+        private static int MILLISECONDS_BEFORE_CHANGE_HANDLED = 1500;
+        private bool _waitingForRender;
+        private int _cursorLocation;
+
+        Task inputWaitTask;
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
+        private readonly IFileService fileService;
+        private readonly IMessageService messageService;
 
         public string LilypondText
         {
@@ -45,28 +58,33 @@ namespace DPA_Musicsheets.ViewModels
             }
         }
 
-        private bool _textChangedByLoad = false;
-        private DateTime _lastChange;
-        private static int MILLISECONDS_BEFORE_CHANGE_HANDLED = 1500;
-        private bool _waitingForRender = false;
-        private int _cursorLocation;
-
-        public LilypondViewModel(FileHandler fileHandler)
+        public LilypondViewModel(FileHandler fileHandler, IFileService fileService, IMessageService messageService)
         {
             _fileHandler = fileHandler;
             writerFactory = new SheetWriterFactory();
             careTaker = new EditorCareTaker();
-            careTaker.Save(new EditorMemento());
-            careTaker.MementoChanged += CareTaker_MementoChanged;
 
             _fileHandler.LilypondTextChanged += (src, e) =>
             {
                 _textChangedByLoad = true;
                 LilypondText = _previousText = e.LilypondText;
                 _textChangedByLoad = false;
+
+                var temp = new EditorMemento();
+                temp.SetText(LilypondText);
+
+                careTaker.Save(temp);
             };
 
             _text = "Your lilypond text will appear here.";
+
+            var initial = new EditorMemento();
+            initial.SetText(LilypondText);
+            careTaker.Save(initial);
+            careTaker.MementoChanged += CareTaker_MementoChanged;
+
+            this.fileService = fileService;
+            this.messageService = messageService;
         }
 
         void CareTaker_MementoChanged(object sender, EditorMemento e)
@@ -115,8 +133,8 @@ namespace DPA_Musicsheets.ViewModels
             LilypondText = editorMemento.Text;
 
             base.RaisePropertyChanged(nameof(RedoCommand));
-            base.RaisePropertyChanged(nameof(ViewModels.LilypondViewModel.UndoCommand));
-        }, (Func<bool>)(() => (bool)careTaker.CanUndo));
+            base.RaisePropertyChanged(nameof(UndoCommand));
+        }, () => careTaker.CanUndo);
 
         public RelayCommand RedoCommand => new RelayCommand(() =>
         {
@@ -126,21 +144,22 @@ namespace DPA_Musicsheets.ViewModels
             LilypondText = editorMemento.Text;
 
             base.RaisePropertyChanged(nameof(RedoCommand));
-            base.RaisePropertyChanged(nameof(ViewModels.LilypondViewModel.UndoCommand));
-        }, (Func<bool>)(() => (bool)careTaker.CanRedo));
+            base.RaisePropertyChanged(nameof(UndoCommand));
+        }, () => careTaker.CanRedo);
 
         public ICommand SaveAsCommand => new RelayCommand(() =>
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Lilypond|*.ly|PDF|*.pdf" };
-            if (saveFileDialog.ShowDialog() == true)
+            var fact = new SheetWriterFactory();
+            var extensions = fact.GetAllSupportedExtension().Select(x => $"{x.name}|*{x.ext}");
+
+            var path = fileService.RequestWritePath(string.Join("", extensions.ToArray()));
+
+            if(!string.IsNullOrWhiteSpace(path))
             {
-                var writer = writerFactory.GetWriter(saveFileDialog.FileName);
+                var writer = writerFactory.GetWriter(path);
                 writer.WriteToFile(careTaker.Current.MusicSheet);
             }
         });
-
-        Task inputWaitTask;
-        CancellationTokenSource tokenSource = new CancellationTokenSource();
 
         public ICommand KeyDownCommand => new RelayCommand<KeyEventArgs>((e) =>
         {
@@ -176,12 +195,12 @@ namespace DPA_Musicsheets.ViewModels
         {
             base.Cleanup();
 
-            if (MessageBox.Show("You have changes in you're lilypond, you want to save it?", "Unsaved changes!",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            var result = messageService.Ask("You have changes in you're lilypond, you want to save it?", "Unsaved Changes");
+
+            if(result == AskQuestionResult.Yes)
             {
                 SaveAsCommand.Execute(null);
             }
         }
-
     }
 }

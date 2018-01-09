@@ -9,7 +9,7 @@ using Core.Builder.Internal;
 
 namespace Core.IO.Internal
 {
-    [SheetReader(Extension, nameof(LilypondSheetReader))]
+    [SheetReader(Extension, "Lilypond")]
     public class LilypondSheetReader : ISheetReader
     {
         public const string Extension = ".ly";

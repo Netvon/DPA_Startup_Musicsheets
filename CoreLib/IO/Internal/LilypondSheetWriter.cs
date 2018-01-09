@@ -8,7 +8,7 @@ using Core.Models;
 
 namespace Core.IO.Internal
 {
-    [SheetWriter(".ly", nameof(LilypondSheetWriter))]
+    [SheetWriter(".ly", "Lilypond")]
     public class LilypondSheetWriter : ISheetWriter
     {
         string filePath;
