@@ -22,6 +22,7 @@ namespace Core.Builder.Internal.Xml
 
             builder.AddKey(parsedKey);
             builder.AddTimeSignature((uint)beats.ValueAsInt, (uint)beat_type.ValueAsInt);
+            builder.AddTempto(120);
         }
     }
 }
