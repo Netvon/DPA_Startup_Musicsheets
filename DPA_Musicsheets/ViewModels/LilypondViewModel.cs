@@ -56,6 +56,7 @@ namespace DPA_Musicsheets.ViewModels
             _fileHandler = fileHandler;
             writerFactory = new SheetWriterFactory();
             careTaker = new EditorCareTaker();
+            careTaker.Save(new EditorMemento());
             careTaker.MementoChanged += CareTaker_MementoChanged;
 
             _fileHandler.LilypondTextChanged += (src, e) =>
@@ -83,6 +84,11 @@ namespace DPA_Musicsheets.ViewModels
 
                     if(careTaker.Current != null)
                         careTaker.Current.CursorIndex = CursorLocation;
+
+                    var clone = (careTaker.Current?.Clone() ?? new EditorMemento()) as EditorMemento;
+
+                    clone.SetText(tb.Text);
+                    careTaker.Save(clone);
                 }
 
                 _waitingForRender = true;
@@ -147,14 +153,13 @@ namespace DPA_Musicsheets.ViewModels
 
             var keyname = Enum.GetName(typeof(Key), key);
 
-            if (commands.Handle(keyname, careTaker))
-            {
-                inputWaitTask = Task.Delay(200).ContinueWith(
-                    (task, obj) =>
-                    {
-                        commands.InvokeLast(careTaker);
-                    }, tokenSource.Token);
-            }
+            commands.Handle(keyname, careTaker);
+
+            inputWaitTask = Task.Delay(200).ContinueWith(
+                (task, obj) =>
+                {
+                    commands.InvokeLast(careTaker);
+                }, tokenSource.Token);
         });
 
         public int CursorLocation
@@ -175,7 +180,7 @@ namespace DPA_Musicsheets.ViewModels
                     MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 SaveAsCommand.Execute(null);
-            }       
+            }
         }
 
     }

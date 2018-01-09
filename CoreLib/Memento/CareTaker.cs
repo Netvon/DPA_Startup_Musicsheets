@@ -39,17 +39,17 @@ namespace Core.Memento
 
         public TMemento Redo()
         {
-            if (!CanUndo)
+            if (!CanRedo)
                 throw new IndexOutOfRangeException();
-            currentSheet = currentSheet.Next;
+            currentSheet = currentSheet.Previous;
             return currentSheet.Value;
         }
 
         public TMemento Undo()
         {
-            if (!CanRedo)
+            if (!CanUndo)
                 throw new IndexOutOfRangeException();
-            currentSheet = currentSheet.Previous;
+            currentSheet = currentSheet.Next;
             return currentSheet.Value;
         }
 
