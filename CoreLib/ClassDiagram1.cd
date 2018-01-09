@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Builder.NoteBuilder" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="12.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAEAAAAIAAAAAAAQQAAAAQAgAgAAAEAIgAAAAAAA=</HashCode>
       <FileName>Builder\NoteBuilder.cs</FileName>
@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Builder.Internal.Lilypond.KeyHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAQAAAAAAAAgAAQIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Lilypond\KeyHandler.cs</FileName>
@@ -30,7 +30,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Lilypond.NoteHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7" Y="2.5" Width="1.5" />
+    <Position X="14" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAQAAACAAAAAAAAIAAAAAAAACAIA=</HashCode>
       <FileName>Builder\Internal\Lilypond\NoteHandler.cs</FileName>
@@ -38,7 +38,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Lilypond.RepeatHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="12.25" Y="2.5" Width="1.5" />
+    <Position X="8.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABEAAAAAQAAAACAAAgAAAIAAIAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Lilypond\RepeatHandler.cs</FileName>
@@ -46,7 +46,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Lilypond.TempoHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="12.25" Y="3.5" Width="1.5" />
+    <Position X="8.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAQAAAAAAAAgAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Lilypond\TempoHandler.cs</FileName>
@@ -54,7 +54,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Lilypond.TimeHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14" Y="3.5" Width="1.5" />
+    <Position X="10.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAQAAAAAAAAgAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Lilypond\TimeHandler.cs</FileName>
@@ -84,7 +84,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Xml.MeasureHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Xml\MeasureHandler.cs</FileName>
@@ -92,29 +92,50 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Builder.Internal.Xml.NameHandler" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="12.25" Y="1.5" Width="1.5" />
+    <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Xml\NameHandler.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Core.Editor.Commands" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+  <Class Name="Core.Editor.CommandBindingAttribute" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\CommandBindingAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Editor.Commands" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAQgNAQAIAAAIAAIAAAAAAAgA=</HashCode>
       <FileName>Editor\Commands.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Core.Editor.KeyBind" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAQAAAoBAAAAAAAAAAAAAAAEAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Editor\KeyBind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.LinkedListExtensions" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Extensions\LinkedListExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Core.IO.Internal.ConvertTypeAttribute" Collapsed="true">
-    <Position X="12.25" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>IO\Internal\LilypondNoteConvertors.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.Internal.LilypondPitchNoteConvertors" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IO\Internal\LilypondNoteConvertors.cs</FileName>
@@ -122,15 +143,15 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.IO.Internal.LilypondSheetReader" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
+    <Position X="12.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAIAgAAA=</HashCode>
       <FileName>IO\Internal\LilypondSheetReader.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.IO.Internal.LilypondSheetWriter" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+    <Position X="14" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAEAEAAAAAAAAAAA=</HashCode>
       <FileName>IO\Internal\LilypondSheetWriter.cs</FileName>
@@ -138,53 +159,60 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.IO.Internal.XmlValidationException" Collapsed="true">
-    <Position X="8.75" Y="4.5" Width="1.5" />
+    <Position X="5.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IO\Internal\XMLSheetReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.Internal.XmlParsingException" Collapsed="true">
-    <Position X="5.25" Y="4.5" Width="1.5" />
+    <Position X="12.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IO\Internal\XMLSheetReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.Internal.XMLSheetReader" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7" Y="4.5" Width="1.5" />
+    <Position X="14" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAIAgAAA=</HashCode>
       <FileName>IO\Internal\XMLSheetReader.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.IO.SheetReaderAttribute" Collapsed="true">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+    <Position X="12.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAQAA=</HashCode>
       <FileName>IO\SheetReaderAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.SheetReaderFactory" Collapsed="true">
-    <Position X="7" Y="3.5" Width="1.5" />
+    <Position X="14" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAACEAAAAABABAgAAAAAAAAA=</HashCode>
       <FileName>IO\SheetReaderFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.SheetWriterAttribute" Collapsed="true">
-    <Position X="8.75" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAQAA=</HashCode>
       <FileName>IO\SheetWriterAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.IO.SheetWriterFactory" Collapsed="true">
-    <Position X="10.5" Y="3.5" Width="1.5" />
+    <Position X="7" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAAAAAAAAAACEAAAAAAAAAgAAAAAAEAA=</HashCode>
       <FileName>IO\SheetWriterFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Memento.CareTaker&lt;TMemento&gt;" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAABAAABEAAAACAAAABAAAAABCAAAIAAAEAAAA=</HashCode>
+      <FileName>Memento\CareTaker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Models.Bar" Collapsed="true">
@@ -216,112 +244,133 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Models.Sheet" Collapsed="true">
-    <Position X="14" Y="2.5" Width="1.5" />
+    <Position X="10.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAEAAAAAAAAAQAAAAAAAQAEIAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Models\Sheet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Util.PriorityAttribute" Collapsed="true">
-    <Position X="8.75" Y="2.5" Width="1.5" />
+    <Position X="5.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Util\PriorityAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Util.Reflection" Collapsed="true">
-    <Position X="10.5" Y="2.5" Width="1.5" />
+    <Position X="7" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAQiAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIEAAAAAAAAAAAgAAiAAAAAAAABAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Util\Reflection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Util.NoSuchFileException" Collapsed="true">
-    <Position X="14" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Util\Zip.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Util.Zip" Collapsed="true">
-    <Position X="10.5" Y="4.5" Width="1.5" />
+    <Position X="7" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Util\Zip.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Core.Builder.Internal.Lilypond.ILilypondTokenHandler" Collapsed="true">
-    <Position X="7" Y="5.75" Width="1.5" />
+    <Position X="8.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Lilypond\ILilypondTokenHandler.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.Builder.Internal.Xml.IXmlElementHandler" Collapsed="true">
-    <Position X="5.25" Y="6.5" Width="1.5" />
+    <Position X="8.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Builder\Internal\Xml\IXmlElementHandler.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Core.Commands.ICommand" Collapsed="true">
-    <Position X="5.25" Y="5.75" Width="1.5" />
+  <Interface Name="Core.Editor.IFileService" Collapsed="true">
+    <Position X="7" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\IFileService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Editor.IMessageService" Collapsed="true">
+    <Position X="10.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Editor\IMessageService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Commands.ICommand" Collapsed="true">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Editor\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.IO.Internal.INoteConvertor" Collapsed="true">
-    <Position X="8.75" Y="5.75" Width="1.5" />
+    <Position X="12.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IO\Internal\LilypondNoteConvertors.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.IO.ISheetReader" Collapsed="true">
-    <Position X="10.5" Y="5.75" Width="1.5" />
+    <Position X="14" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAgAAA=</HashCode>
       <FileName>IO\ISheetReader.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.IO.ISheetWriter" Collapsed="true">
-    <Position X="12.25" Y="5.75" Width="1.5" />
+    <Position X="5.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAEAEAAAAAAAAAAA=</HashCode>
       <FileName>IO\ISheetWriter.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.Visitor.IVisitor" Collapsed="true">
-    <Position X="14" Y="5.75" Width="1.5" />
+    <Position X="7" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Visitor\IVisitor.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="Core.Editor.AskQuestionResult" Collapsed="true">
+    <Position X="5.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAQAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\IMessageService.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Enum Name="Core.Models.Repeat" Collapsed="true">
-    <Position X="8.75" Y="7.5" Width="1.5" />
+    <Position X="10.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Models\Bar.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Core.Models.NoteModifier" Collapsed="true">
-    <Position X="5.25" Y="7.5" Width="1.5" />
+    <Position X="7" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Models\NoteModifier.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Core.Models.NotePitch" Collapsed="true">
-    <Position X="7" Y="7.5" Width="1.5" />
+    <Position X="8.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgEAAAA=</HashCode>
       <FileName>Models\NotePitch.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Core.Models.SheetKey" Collapsed="true">
-    <Position X="10.5" Y="7.5" Width="1.5" />
+    <Position X="12.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAAAAAA=</HashCode>
       <FileName>Models\SheetKey.cs</FileName>
